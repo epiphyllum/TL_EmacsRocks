@@ -24,20 +24,20 @@
 
 如果你第一次听说 Emacs 你可以在[性感的 Emacs（Emacs is Sexy）](http://emacs.sexy/)一文中找到使用它的理由！我相信你一定被它的强大所吸引。
 
-如果你还没有安装 Emacs 可以在[Mac OS X 安装链接](http://emacsformacosx.com/builds)以及 [Window 安装链接](http://emacsbinw64.sourceforge.net/)找到它。
+如果你还没有安装 Emacs 可以在 [Mac OS X 安装链接](http://emacsformacosx.com/builds)以及 [Window 安装链接](http://emacsbinw64.sourceforge.net/)找到它。
 
-在开始本教程之前请务必先完成 Emacs 提供的官方教程，它可以通过使用 `C-h t`（同时按住 Ctrl 与 h 键，接着按 t 键（t 代表 tutorial）） 在 Emacs 中直接将其打开。
+在开始本教程之前请务必先完成 Emacs 提供的官方教程（完成时间大约30分钟），它可以通过使用 `C-h t`（同时按住 Ctrl 与 h 键，接着按 t 键（t 代表 tutorial）） 在 Emacs 中直接将其打开。
 
 Elisp 是 Emacs 所用的编程语言，你可以在阅读[这篇教程（Learn X in Y Minutes）](https://learnxinyminutes.com/docs/elisp/)后很快的了解它的基础用法。
 
 ### 基础操作
 
-因为 Control 键在 Emacs 中极为常用所以为了更方便的使用 Emacs 的键位修改，需要对其做出修改。建议将大写锁定键（Caps Lock）替换为 Control 键。具体操作请自行搜索。
+因为 Control 键在 Emacs 中极为常用所以为了更方便的使用 Emacs 的键位修改，需要对其做出修改。建议将大写锁定键（Caps Lock）替换为 Control 键。各个系统下的具体修改方式请自行搜索。
 
 常见符号所代表的意义如下
 
-- M(eta)
-- s(uper), 在 Mac 环境下为左 Command 键
+- M(eta)，在 Mac 下为 Option 键
+- s(uper)，在 Mac 环境下为左 Command 键
 - S(Shift)
 - C(trl)
 
@@ -73,7 +73,7 @@ Emacs 是一个富文档编辑器（Self document, extensible editor）而下面
 
 ### 学习基础 Elisp
 
-请务必完成[这篇教程（Learn X in Y Minutes）](https://learnxinyminutes.com/docs/elisp/)来了解 Elisp 的使用，你也可以在[这里](https://learnxinyminutes.com/docs/zh-cn/elisp-cn/)找到它的中文版。Elisp 为一个函数式的语言其所有功能都是由函数来实现的。
+请务必完成[这篇教程（Learn X in Y Minutes）](https://learnxinyminutes.com/docs/elisp/)来了解 Elisp 的使用（阅读时间大约15分钟），你也可以在[这里](https://learnxinyminutes.com/docs/zh-cn/elisp-cn/)找到它的中文版。Elisp 为一个函数式的语言其所有功能都是由函数来实现的。
 
 下面为一些简单的例子
 
@@ -109,11 +109,11 @@ Emacs 是一个富文档编辑器（Self document, extensible editor）而下面
 
 Emacs 的配置文件默认保存在 `~/.emacs.d/init.el` 文件中。（如果不存在可自行创建）
 
-在开始之前我们先区别 Emacs 中 Major Mode 与 Minor Mode。 Major Mode 通常是定义对于一种文件类型编辑的核心规则，例如语法高亮、缩进、快捷键绑定等。Minor Mode 除去核心功能以外的均为 Minor Mode。
+在开始之前我们先来区别 Emacs 中 Major Mode 与 Minor Mode。 Major Mode 通常是定义对于一种文件类型编辑的核心规则，例如语法高亮、缩进、快捷键绑定等。Minor Mode 除去核心功能以外的编辑功能均为 Minor Mode 所提供。
 
-一个文件最多只能存在一个 Major Mode 但是它可以同时激活多个 Minor Mode。
+一个文件类型同时只能存在一个 Major Mode 但是它可以同时激活多个 Minor Mode。
 
-使用 C-h m 可以显示当前所有的开启的 Minor Mode。
+使用 C-h m 可以显示当前所有开启的 Minor Mode。
 
 **简单的编辑器自定义**
 
