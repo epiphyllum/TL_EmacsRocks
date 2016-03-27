@@ -1,0 +1,43 @@
+keystroke, description
+C-v, forward one screen
+M-v, backward one screen
+C-l, move current line center (center, top, bottom)
+C-p, move one line up
+C-n, move one line down
+C-b, move one char backward
+C-f, move one char forward
+M-f, move one word forward
+M-b, move one word backward
+C-a, move to beginning of a line
+C-e, move to end of a line
+M-a, move to beginning of a sentence
+M-e, move to end of a sentence
+M-<, move to beginning of the whole text
+M->, move to end of the whole text
+C-u 8 C-f, move forward eight characters
+C-g, stop a command
+C-x one window (kill all other windows)
+C-d, delete next char after the cursor
+M-<del>, kill the word before the cursor
+M-d, kill the word next the cursor
+C-k, kill from the cursor to end of line
+M-k, kill to the end of the current sentence
+Difference between "killing" and "deleting", "killed" text can be reinserted (yanking); "deleted text cannot be reinserted"
+C-y, yanking; reinserts the last killed text
+M-y, cycle previous killed text
+C-/, undo changes by one command
+C-x u, undo
+C-x C-f, find a file
+C-x C-s, save the file
+C-x C-b, list buffers
+C-x b BUFFER_NAME, switch to target buffer
+M-x, named command extend
+C-z, suspends emacs
+fg or %emacs, resume emacs
+C-x C-c, exit emacs
+C-h m, view documentation on current major mode
+C-s, i-search after cursor
+C-r, i-search before cursor
+C-x 2, splits the screen into two windows
+C-M-v, scroll the bottom window
+C-x o, move the cursor to the other window
