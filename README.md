@@ -227,19 +227,48 @@ Emacs 的配置文件默认保存在 `~/.emacs.d/init.el` 文件中。（如果�
 在进行美化之前我们需要配置插件的源（默认的源非常有限），最常使用的是 [MELPA](https://melpa.org/) （Milkypostman's Emacas Lisp Package Archive）它有非常多的插件（3010 个插件）。下载的次数并不能说明它非常有用，也许这个插件是其他的插件依赖。在[这里](https://melpa.org/#/getting-started)你可以找到其安装使用方法。添加源后，我们就可以使用 `M-x package-list-packages` 来查看所有 MELPA 上的插件了。在表单中可以使用 `I` 来标记安装 `D` 来标记删除，`U` 来更新，并用 `X` 来确认。
 
 ```elisp
-(require 'package) ;; You might already have this line
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-(package-initialize) ;; You might already have this line
+(when (>= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    (add-to-list 'package-archives '("melpa" . "http://melpRETa.org/packages/") t)
+    )
+
+;; cl - Common Lisp Extension
+(require 'cl)
+
+;; Add Packages
+(defvar YOUR_NAME_HERE/packages '(
+			   company
+			   hungry-delete
+			   swiper
+			   counsel
+			   smartparens
+			   js2-mode
+			   nodejs-repl
+			   exec-path-from-shell
+			   monokai-theme
+			   ) "Default packages")
+
+(setq package-selected-packages YOUR_NAME_HERE/packages)
+(defun YOUR_NAME_HERE/packages-installed-p ()
+    (loop for pkg in YOUR_NAME_HERE/packages
+          when (not (package-installed-p pkg)) do (return nil)
+          finally (return t)))
+(unless (YOUR_NAME_HERE/packages-installed-p)
+    (message "%s" "Refreshing package database...")
+    (package-refresh-contents)
+    (dolist (pkg YOUR_NAME_HERE/packages)
+      (when (not (package-installed-p pkg))
+        (package-install pkg))))
+;; Find Executable Path on OS X
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 ```
 
 我们可以将 Emacs 设置为开启默认全屏，
 
 ```elisp
-(setq initial-frame-alist (quote ((fullscreen, maximized))))
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
 ```
 
 我们也可以启用自动括号匹配（Highlight Matching Parenthesis），随后会介绍插件来增强这个匹配的功能。你可以在[这里](https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html)读到关于钩子的更多信息。
@@ -329,8 +358,10 @@ Emacs 的配置文件默认保存在 `~/.emacs.d/init.el` 文件中。（如果�
   (global-set-key (kbd "C-c a") 'org-agenda)
 ```
 
-- `C-c C-x` 选择想要完成的时间
-- `C-c C-e` 选择想要结束的时间
+你只需将你的 `*.org` 文件放入指定的文件夹中就可以开始使用 Agenda 模式了。
+
+- `C-c C-s` 选择想要完成的时间
+- `C-c C-d` 选择想要结束的时间
 - `C-c a` 可以打开 Agenda 模式菜单并选择不同的可视方式（`r` 可以在不同的可视方式中更新）
 
 ## 贡献人列表
