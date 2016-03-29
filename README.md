@@ -1,24 +1,32 @@
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Spacemacs Rocks （第二季）](#spacemacs-rocks-第二季)
+	- [第一集：准备开始](#第一集准备开始)
+		- [基础操作](#基础操作)
+		- [内置功能](#内置功能)
+		- [学习基础 Elisp](#学习基础-elisp)
+		- [开始 Hacking！](#开始-hacking)
+		- [插件管理](#插件管理)
+		- [Org-mode](#org-mode)
+	- [第二集：高级自定义](#第二集高级自定义)
+		- [Emacs 也很美](#emacs-也很美)
+		- [JavaScript IDE](#javascript-ide)
+		- [Org-mode 进阶](#org-mode-进阶)
+	- [贡献人列表](#贡献人列表)
+
+<!-- /TOC -->
+
 # Spacemacs Rocks （第二季）
 
 在这一季中计划在21天的时间内学习 Emacs 以及 Spacemacs 的使用。从基础安装开始到可以运用到工作生产环节中。为了确保学习质量，请务必完成和理解计划中的每一项学习任务。
 
 ## 第一集：准备开始
 
-**内容大纲**
-
-- `00:00 - 01:55` Emacs 的安装
-- `02:00 - 10:00` Emacs 基础操作
-- `10:00 - 16:00` Emacs 内置功能
-- `16:00 - 24:00` 基础 Emacs Lisp
-- `24:00 - 34:00` 开始 Hacking ！
-- `34:00 - 41:00` 插件管理系统（Company 插件安装及 Mode 介绍）
-- `41:00 - 46:00` 基础 Org-mode 使用
-
 视频地址如下
 
 - [优酷视频](http://v.youku.com/v_show/id_XMTUwNjU0MjE0OA==.html)
 - [百度网盘](http://pan.baidu.com/s/1gep9DQV)
-- [YouTube](https://www.youtube.com/watch?v=0hpVuoyO8_o&feature=youtu.be)
+- [YouTube](https://www.youtube.com/watch?v=2Q0MhOR59u8)
 
 **说在最前面**
 
@@ -173,9 +181,16 @@ Emacs 的配置文件默认保存在 `~/.emacs.d/init.el` 文件中。（如果�
 
 ## 第二集：高级自定义
 
+视频地址如下
+
+- [优酷视频](http://v.youku.com/v_show/id_XMTUxMzQyODI4MA==.html)
+- [百度网盘](http://pan.baidu.com/s/1c2Cw9ck)
+- [YouTube](https://youtu.be/aQRZxaU3pAI)
+
+
 **说在最前面**
 
-如果你想深入学习 Emacs Lisp 可以阅读 GNU 提供的 [An Introduction to PRogramming in Emacs Lisp](https://www.gnu.org/software/emacs/manual/html_mono/eintr.html) 。（`M-x info` 然后选择 Emacs Lisp Intro）
+如果你想深入学习 Emacs Lisp 可以阅读 GNU 提供的 [An Introduction to Programming in Emacs Lisp](https://www.gnu.org/software/emacs/manual/html_mono/eintr.html) 。（`M-x info` 然后选择 Emacs Lisp Intro）
 
 我们先解决上一集中的一些问题。首先是区分 `setq` 与 `setq-default` 的区别，`setq` 为设置当前缓冲区（Buffer）中的变量值，`setq-default` 设置的为全局的变量的值（具体内容可以在 [StackOverflow 找到](http://stackoverflow.com/questions/18172728/the-difference-between-setq-and-setq-default-in-emacs-lisp)）。下面是一个例子，用于设置光标样式的方法。
 
@@ -336,10 +351,10 @@ Emacs 的配置文件默认保存在 `~/.emacs.d/init.el` 文件中。（如果�
 使用 `<s` 然后 <kbd>Tab</kbd> 可以直接插入代码块的模板（Snippet）。
 
 ```
-#+BEGIN_SRC emacs-lisp
-;; Your code goes here
-;; 你的代码写在这里
-#+END_SRC
+ #+BEGIN_SRC emacs-lisp
+ ;; Your code goes here
+ ;; 你的代码写在这里
+ #+END_SRC
 ```
 
 **添加 Org-mode 文本内语法高亮**
