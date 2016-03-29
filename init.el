@@ -1,7 +1,7 @@
 (when (>= emacs-major-version 24)
     (require 'package)
     (package-initialize)
-    (add-to-list 'package-archives '("melpa" . "http://melpRETa.org/packages/") t)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
     )
 
 ;; cl - Common Lisp Extension
@@ -52,7 +52,7 @@
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 ;; Enable Recent Files
 (require 'recentf)
-(recentf-mode 1)			
+(recentf-mode 1)
 (setq recentf-max-menu-items 25)
 ;; Load Editor Theme
 (load-theme 'solarized-light 1)
@@ -74,6 +74,9 @@
 (global-linum-mode 1)
 ;; Change cursor style
 (setq-default cursor-type 'bar)
+;; Change Font-size
+;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
+(set-face-attribute 'default nil :height 160)
 
 
 ;; Package Related Setting
