@@ -120,7 +120,6 @@
 ;; Key Binding
 ;; ===================================================================
 ;; Quick Open Config File (init.el)
-;; TODO: <f2> DOES NOT WORK
 (global-set-key (kbd "<f2>") 'open-init-file)
 
 ;; Open Recent Files List
