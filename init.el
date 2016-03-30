@@ -36,7 +36,7 @@
 (defun xinyang/packages-installed-p ()
     (loop for pkg in xinyang/packages
           when (not (package-installed-p pkg)) do (return nil)
-          finally (return t)))
+          finally (return 1)))
 (unless (xinyang/packages-installed-p)
     (message "%s" "Refreshing package database...")
     (package-refresh-contents)
@@ -103,7 +103,7 @@
 ;; Company Mode
 ;; -------------------------------------------------------------------
 ;; Enable global company mode
-(global-company-mode t)
+(global-company-mode 1)
 
 ;; Hungry-delete
 ;; -------------------------------------------------------------------
