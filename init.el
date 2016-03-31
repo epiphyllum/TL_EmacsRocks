@@ -7,8 +7,7 @@
 (when (>= emacs-major-version 24)
     (require 'package)
     (package-initialize)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-    )
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") 1))
 
 ;; cl - Common Lisp Extension
 (require 'cl)
@@ -33,16 +32,19 @@
 			   ) "Default packages")
 
 (setq package-selected-packages xinyang/packages)
+
 (defun xinyang/packages-installed-p ()
     (loop for pkg in xinyang/packages
           when (not (package-installed-p pkg)) do (return nil)
           finally (return 1)))
+
 (unless (xinyang/packages-installed-p)
     (message "%s" "Refreshing package database...")
     (package-refresh-contents)
     (dolist (pkg xinyang/packages)
       (when (not (package-installed-p pkg))
         (package-install pkg))))
+
 ;; Find Executable Path on OS X
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
