@@ -371,7 +371,7 @@ Emacs 的配置文件默认保存在 `~/.emacs.d/init.el` 文件中。（如果�
 (setq org-src-fontify-natively t)
 ```
 
-在 Org-mode 中重置有序列表序号可以直接使用 M-<RET> 。
+在 Org-mode 中重置有序列表序号可以直接使用 M-\<RET\> 。
 
 **Agenda 的使用**
 
