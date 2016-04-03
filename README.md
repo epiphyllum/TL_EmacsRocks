@@ -250,7 +250,7 @@ Emacs 的配置文件默认保存在 `~/.emacs.d/init.el` 文件中。（如果�
 你可以直接将下面的代码复制到你的配置文件顶端，从而直接使用 Melpa 作为插件的源。你可以将你需要的插件名字写在 `YOUR_NAME_HERE/packages` 中，Emacs 在启动时会自动下载未被安装的插件。
 
 ```elisp
-(when (>= emacs-majooar-version 24)
+(when (>= emacs-major-version 24)
     (require 'package)
     (package-initialize)
     (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
