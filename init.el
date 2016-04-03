@@ -23,6 +23,7 @@
 			   smartparens
 			   ;; --- Major Mode ---
 			   js2-mode
+			   markdown-mode
 			   ;; --- Minor Mode ---
 			   nodejs-repl
 			   exec-path-from-shell
@@ -130,6 +131,13 @@
       (append
        '(("\\.js\\'" . js2-mode))
        auto-mode-alist))
+
+;; markdown-mode
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;;       ___       __   ___  __
 ;; |__| |__  |    |__) |__  |__)
