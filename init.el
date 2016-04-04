@@ -69,7 +69,8 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 ;; Load Editor Theme
-(load-theme 'solarized-light 1)
+(load-theme 'solarized-dark 1)
+;; (load-theme 'solarized-light 1)
 
 ;;       __   __   ___       __             __   ___
 ;;  /\  |__) |__) |__   /\  |__)  /\  |\ | /  ` |__
@@ -208,6 +209,9 @@
  ;; If there is more than one, they won't work right.
  '(company-idle-delay 0.1)
  '(company-minimum-prefix-length 1)
+ '(custom-safe-themes
+   (quote
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(package-selected-packages (quote (company))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
