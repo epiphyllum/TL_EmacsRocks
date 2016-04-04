@@ -17,6 +17,7 @@
 			   ;; --- Auto-completion ---
 			   company
 			   ;; --- Better Editor ---
+         smooth-scrolling
 			   hungry-delete
 			   swiper
 			   counsel
