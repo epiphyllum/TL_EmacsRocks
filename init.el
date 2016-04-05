@@ -17,7 +17,7 @@
 			   ;; --- Auto-completion ---
 			   company
 			   ;; --- Better Editor ---
-         smooth-scrolling
+			   smooth-scrolling
 			   hungry-delete
 			   swiper
 			   counsel
@@ -94,7 +94,7 @@
 (setq-default cursor-type 'bar)
 ;; Change Font-size
 ;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
-(set-face-attribute 'default nil :height 160)
+(set-face-attribute 'default nil :height 150)
 
 ;;  __        __             __   ___
 ;; |__)  /\  /  ` |__/  /\  / _` |__
@@ -187,6 +187,7 @@
 
 ;; Org-mode Related Key Binding
 ;; -------------------------------------------------------------------
+;; Org mode agenda vide default key binding
 (global-set-key (kbd "C-c a") 'org-agenda)
 
 
@@ -202,6 +203,17 @@
 ;; Set Org-mode Agenda File
 (setq org-agenda-files '("~/org"))
 
+;; Change Heading Size
+(custom-set-faces
+ '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+
+;; Set ToDos Type
+(setq org-todo-keywords
+      '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
