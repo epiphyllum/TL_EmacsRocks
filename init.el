@@ -26,7 +26,11 @@
 			   js2-mode
 			   markdown-mode
 			   ;; --- Minor Mode ---
+			   ;; Quick Note Taking
+			   deft
+			   ;; JavaScript REPL
 			   nodejs-repl
+			   ;; Find OS X Executable Helper Package
 			   exec-path-from-shell
 			   ;; --- Themes ---
 			   ;; monokai-theme
@@ -126,6 +130,12 @@
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers 1)
 
+;; Deft
+;; -------------------------------------------------------------------
+;; Set default Deft note file type
+(setq deft-extensions '("md" "org" "txt" "tex"))
+(setq deft-directory "~/.deft/")
+
 ;; js2-mode
 ;; -------------------------------------------------------------------
 ;; Enable js2-mode for JavaScript File
@@ -184,6 +194,10 @@
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "C-h f") 'counsel-describe-function)
 (global-set-key (kbd "C-h v") 'counsel-describe-variable)
+
+;; Deft
+;; -------------------------------------------------------------------
+(global-set-key (kbd "<f8>") 'deft)
 
 ;; Org-mode Related Key Binding
 ;; -------------------------------------------------------------------
