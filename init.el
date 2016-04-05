@@ -200,6 +200,9 @@
 (require 'org)
 (setq org-src-fontify-natively 1)
 
+;; Enable Org-indent-mode
+(add-hook 'org-mode-hook 'org-indent-mode)
+
 ;; Set Org-mode Agenda File
 (setq org-agenda-files '("~/org"))
 
