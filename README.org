@@ -462,7 +462,113 @@ Emacs 提供的默认 JavaScript Major Mode 并不是非常好用。所以我们
 -  =C-c C-s= 选择想要完成的时间
 -  =C-c C-d= 选择想要结束的时间
 -  =C-c a= 可以打开 Agenda 模式菜单并选择不同的可视方式（=r=
-   可以在不同的可视方式中更新）
-* 贡献人列表
 
--  [[https://github.com/li-xinyang][li-xinyang]]
+* 第三天：进阶使用
+
+视频地址如下
+
+** 多文件存储配置文件
+
+将不同的配置代码放置到不同的文件中，使其模块化，这让我们的后续维护变得更加简单。下面是我们现在的 =~/.emacs.d/= 目录的样子，
+
+#+BEGIN_EXAMPLE
+├── auto-save-list # 自动生成的保存数据
+├── elpa # 下载的插件目录
+├── init.el # 我们的配置文件
+└── recentf # 最近访问的文件列表
+#+END_EXAMPLE
+
+通常我们只保存配置文件，其他均为在第一次使用的时再去网络经行重新下载，当然你也可以选择将全部内容进行版本控制来保证自己时刻拥有稳定的工作环境。
+
+# 补充 load-file load-path 和 load 的使用方法
+
+Elisp 中并没有命名空间（Namespace）所以其命名方法就变的非常重要，换句话说就是所有的变量均为全局变量。下面是一个简单的命名规则，
+
+#+BEGIN_EXAMPLE
+
+#自定义变量可以使用自己的名字作为命名方式（可以是变量名或者函数名）
+YourName/XXXX
+
+#模式命名规则
+ModeName-mode
+
+#模式内的变量则可以使用
+ModeName-VariableName
+
+#+END_EXAMPLE
+
+使用上面的命名规则可以最大程度的避免命名冲突的可能性。
+
+现在我们需要将配置分为下面的几个模块，他们分别是
+ 
+#+BEGIN_EXAMPLE
+init-packages.el        # 插件管理
+init-ui.el              # 视觉层配置
+init-better-defaults.el # 增强内置功能
+init-keybindings.el     # 快捷键绑定
+custome.el              # 存放使用编辑器接口产生的配置信息
+#+END_EXAMPLE
+
+~init.el~ 是所有模块配置文件的入口，所以要使用这些模块我们需要在其中进行
+ 
+
+** Major 与 Minor Mode 详解
+
+这一节我们将详细介绍 Major Mode 与 Minor Mode 去区别。
+
+** 更好的默认设置
+
+在这一节我们会配置我们的编辑器使其有更好的使用体验。
+
+下面的代码可以是 Emacs 自动加载外部修改过的文件。
+
+#+BEGIN_EXAMPLE
+(global-auto-revert-mode t)
+#+END_EXAMPLE
+
+使用下面的代码可以关闭自己生产的保存文件（之前我们已经关闭过了 Emacs 自动生产的备份文件了，现在是关闭自动保存文件）。
+
+#+BEGIN_EXAMPLE
+(setq auto-save-default nil)
+#+END_EXAMPLE
+
+如果你发现你在使用中发现了那些编辑行为与你预期的不相符时，你可以通过搜索引擎去寻找解决方案然后将其加入你的配置中并打造一个真正属于你的神器！
+
+=popwin= 插件可以自动将光标移动到，新创建的窗口中。使用下面的代码将其启用，
+
+#+BEGIN_EXAMPLE
+(require 'popwin)
+(popwin-mode t)
+#+END_EXAMPLE
+
+也许你并不喜欢听到错误时的“哔哔”的警告提示音，使用下面的代码你可以关闭 Emacs 中的警告音，
+
+#+BEGIN_SRC lisp
+(setq ring-bell-function 'ignore)
+#+END_SRC
+
+*** 缩写补全
+
+使用下面的代码我们可以开启 ~abbrev~ 模式并定义一个缩写表，每当我们输入下面的缩写并以空格结束时，Emacs 就会将其自动展开成为我们所需要的字符串。
+
+#+BEGIN_SRC lisp
+  (abbrev-mode t)
+  (define-abbrev-table 'global-abbrev-table '(
+                                              ;; Shifu
+                                              ("8zl" "zilongshanren")
+                                              ;; contributor
+                                              ("8lxy" "lixinyang")
+                                             ))
+#+END_SRC
+
+上面的缩写的 ~8~ 也类似于命名空间，使其不会与我们所常用的
+
+** Dired Mode
+
+Dired Mode 是一个强大的模式它能让我们完成和文件管理相关的所有工作。
+
+** Org-mode 管理 Emacs 配置
+
+Org-mode 下的文学编程将颠覆你对于 Emacs 的看法。
+
+** 练习

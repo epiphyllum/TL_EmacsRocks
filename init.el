@@ -1,59 +1,16 @@
-;;  __        __             __   ___
-;; |__)  /\  /  ` |__/  /\  / _` |__
-;; |    /~~\ \__, |  \ /~~\ \__> |___
-;;                      __   ___        ___      ___
-;; |\/|  /\  |\ |  /\  / _` |__   |\/| |__  |\ |  |
-;; |  | /~~\ | \| /~~\ \__> |___  |  | |___ | \|  |
-(when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") 1))
 
-;; cl - Common Lisp Extension
-(require 'cl)
 
-;; Add Packages
-(defvar xinyang/packages '(
-			   ;; --- Auto-completion ---
-			   company
-			   ;; --- Better Editor ---
-			   smooth-scrolling
-			   hungry-delete
-			   swiper
-			   counsel
-			   smartparens
-			   ;; --- Major Mode ---
-			   js2-mode
-			   markdown-mode
-			   ;; --- Minor Mode ---
-			   ;; Quick Note Taking
-			   deft
-			   ;; JavaScript REPL
-			   nodejs-repl
-			   ;; Find OS X Executable Helper Package
-			   exec-path-from-shell
-			   ;; --- Themes ---
-			   ;; monokai-theme
-			   solarized-theme
-			   ) "Default packages")
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
 
-(setq package-selected-packages xinyang/packages)
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 
-(defun xinyang/packages-installed-p ()
-    (loop for pkg in xinyang/packages
-          when (not (package-installed-p pkg)) do (return nil)
-          finally (return 1)))
-
-(unless (xinyang/packages-installed-p)
-    (message "%s" "Refreshing package database...")
-    (package-refresh-contents)
-    (dolist (pkg xinyang/packages)
-      (when (not (package-installed-p pkg))
-        (package-install pkg))))
-
-;; Find Executable Path on OS X
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+;; Package Management
+;; -----------------------------------------------------------------
+(require 'init-packages)
 
 ;;  ___  __    ___  __   __
 ;; |__  |  \ |  |  /  \ |__)
@@ -100,56 +57,7 @@
 ;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
 (set-face-attribute 'default nil :height 150)
 
-;;  __        __             __   ___
-;; |__)  /\  /  ` |__/  /\  / _` |__
-;; |    /~~\ \__, |  \ /~~\ \__> |___
-;;  __   ___ ___ ___         __
-;; /__` |__   |   |  | |\ | / _`
-;; .__/ |___  |   |  | | \| \__>
-;; Package Related Setting
-;; ===================================================================
 
-;; Company Mode
-;; -------------------------------------------------------------------
-;; Enable global company mode
-(global-company-mode 1)
-
-;; Hungry-delete
-;; -------------------------------------------------------------------
-;; Enable global hungry-delete
-(require 'hungry-delete)
-(global-hungry-delete-mode 1)
-
-;; Smartparens
-;; -------------------------------------------------------------------
-(require 'smartparens-config)
-(smartparens-global-mode 1)
-
-;; Ivy-mode
-;; -------------------------------------------------------------------
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers 1)
-
-;; Deft
-;; -------------------------------------------------------------------
-;; Set default Deft note file type
-(setq deft-extensions '("md" "org" "txt" "tex"))
-(setq deft-directory "~/.deft/")
-
-;; js2-mode
-;; -------------------------------------------------------------------
-;; Enable js2-mode for JavaScript File
-(setq auto-mode-alist
-      (append
-       '(("\\.js\\'" . js2-mode))
-       auto-mode-alist))
-
-;; markdown-mode
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" 1)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;;       ___       __   ___  __
 ;; |__| |__  |    |__) |__  |__)
