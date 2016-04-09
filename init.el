@@ -22,18 +22,15 @@
 ;; -----------------------------------------------------------------
 (require 'init-better-defaults)
 
-;; Org
-;; -----------------------------------------------------------------
-(require 'init-org)
-
 ;; Keybindings
 ;; -----------------------------------------------------------------
 (require 'init-keybindings)
 
-;; Custome
+;; Org
 ;; -----------------------------------------------------------------
-(setq custom-file (expand-file-name "lisp/init-custom.el" user-emacs-directory))
+(require 'org)
+
+;; Custom
+;; -----------------------------------------------------------------
+(setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
 (load-file custom-file)
-
-
-
