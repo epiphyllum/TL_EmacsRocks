@@ -509,7 +509,7 @@ init-keybindings.el     # 快捷键绑定
 custome.el              # 存放使用编辑器接口产生的配置信息
 #+END_EXAMPLE
 
-~init.el~ 是所有模块配置文件的入口，所以要使用这些模块我们需要在其中进行
+~init.el~ 是所有模块配置文件的入口，所以要使用这些模块我们需要在其中进行引用
  
 
 ** Major 与 Minor Mode 详解
