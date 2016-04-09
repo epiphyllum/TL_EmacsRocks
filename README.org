@@ -1,4 +1,4 @@
-* Spacemacs Rocks（第二季）
+* Spacemacs Rocks 第二季
 
 #+CAPTION: Artwork 
 [[./Artwork.png]]
@@ -384,7 +384,7 @@ Emacs 提供的默认 JavaScript Major Mode 并不是非常好用。所以我们
 
 你可以在[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Auto-Major-Mode.html][这里]]（How Emacs Chooses a Major Mode）找到 Emacs 是如何选择何时该选用何种 Major Mode 的方法。
 
-在这里我们需要知道 =auto-mode-alist= 的作用，这个变量是一个 [[https://www.emacswiki.org/emacs/AssociationList][=AssociationList=]]，它使用正则表达式（REGEXP）的规则来匹配不同类型文件应使用的 Major Model 。 下面是几个正则表达式匹配的例子，
+在这里我们需要知道 =auto-mode-alist= 的作用，这个变量是一个 [[https://www.emacswiki.org/emacs/AssociationList][=AssociationList=]]，它使用正则表达式（REGEXP）的规则来匹配不同类型文件应使用的 Major Mode 。 下面是几个正则表达式匹配的例子，
 
 #+BEGIN_SRC lisp
     (("\\`/tmp/fol/" . text-mode)
@@ -463,7 +463,6 @@ Emacs 提供的默认 JavaScript Major Mode 并不是非常好用。所以我们
 -  =C-c C-d= 选择想要结束的时间
 -  =C-c a= 可以打开 Agenda 模式菜单并选择不同的可视方式（=r=
    可以在不同的可视方式中更新）
-
 * 贡献人列表
 
 -  [[https://github.com/li-xinyang][li-xinyang]]
