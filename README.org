@@ -495,12 +495,11 @@ ModeName-mode
 
 #模式内的变量则可以使用
 ModeName-VariableName
-
 #+END_EXAMPLE
 
 使用上面的命名规则可以最大程度的避免命名冲突的可能性。
 
-现在我们需要将配置分为下面的几个模块，他们分别是
+现在我们需要将配置分为下面的几个模块（独立的配置文件并将其保存在指定的子目录中），他们分别是
  
 #+BEGIN_EXAMPLE
 init-packages.el        # 插件管理
@@ -510,9 +509,120 @@ init-keybindings.el     # 快捷键绑定
 custome.el              # 存放使用编辑器接口产生的配置信息
 #+END_EXAMPLE
 
+下面为将配置文件模块化后的目录结构，
+
+#+BEGIN_EXAMPLE
+├── init.el
+└── lisp
+    ├── comstom.el
+    ├── init-better-defaults.el
+    ├── init-helper.el
+    ├── init-keybindings.el
+    ├── init-packages.el
+    ├── init-ui.el
+    └── org.el
+#+END_EXAMPLE
+
+这样我们就可以在之后的配置中迅速的定位于更改我们的配置文件，让整个过程更有条理也更高效。
+
 ~init.el~ 是所有模块配置文件的入口，所以要使用这些模块我们需要在其中进行引用。下面以 ~init-packages.el~ 为例，详细说明如何模块化以及应用的方法。
 
-# TODO: Add explanation for modularzing config file
+在模块化配置之前，我们所使用的配置文件为 =~/.emacs.d/init.el= 并将所以的配置代码都放在其中（如下所示）
+
+=~/.emacs.d/init.el=
+
+#+BEGIN_SRC lisp
+;;  __        __             __   ___
+;; |__)  /\  /  ` |__/  /\  / _` |__
+;; |    /~~\ \__, |  \ /~~\ \__> |___
+;;                      __   ___        ___      ___
+;; |\/|  /\  |\ |  /\  / _` |__   |\/| |__  |\ |  |
+;; |  | /~~\ | \| /~~\ \__> |___  |  | |___ | \|  |
+(when (>= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") 1))
+
+;; cl - Common Lisp Extension
+(require 'cl)
+
+;; Add Packages
+(defvar xinyang/packages '(
+			   ;; --- Auto-completion ---
+			   company
+			   ;; --- Better Editor ---
+			   smooth-scrolling
+			   hungry-delete
+			   swiper
+			   counsel
+			   smartparens
+			   ;; --- Major Mode ---
+			   js2-mode
+			   markdown-mode
+			   ;; --- Minor Mode ---
+			   ;; Quick Note Taking
+			   deft
+			   ;; JavaScript REPL
+			   nodejs-repl
+			   ;; Find OS X Executable Helper Package
+;; ...
+#+END_SRC
+
+为了更好的区分不同的区域我使用的方法是使用 ASCII ART 然后再以关键字来使用所搜跳转，但是这样再编辑工程中依旧十分缓慢和麻烦。于是我们现在将其全部模块化，将不同的配置代码放置在不同的配置文件中，并在入口文件（ =~/.emacs.d/init.el= ）中将其引用。
+
+=~/.emacs.d/lisp/init-packages.el=
+
+#+BEGIN_SRC lisp
+;;  __        __             __   ___
+;; |__)  /\  /  ` |__/  /\  / _` |__
+;; |    /~~\ \__, |  \ /~~\ \__> |___
+;;                      __   ___        ___      ___
+;; |\/|  /\  |\ |  /\  / _` |__   |\/| |__  |\ |  |
+;; |  | /~~\ | \| /~~\ \__> |___  |  | |___ | \|  |
+(when (>= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") 1))
+
+;; cl - Common Lisp Extension
+(require 'cl)
+
+;; Add Packages
+(defvar xinyang/packages '(
+			   ;; --- Auto-completion ---
+			   company
+			   ;; --- Better Editor ---
+			   smooth-scrolling
+			   hungry-delete
+			   swiper
+			   counsel
+			   smartparens
+			   popwin
+			   ;; --- Major Mode ---
+			   js2-mode
+			   markdown-mode
+
+;; ...
+
+;; 文件末尾
+(provide 'init-packages)
+#+END_SRC
+
+=~/.emacs.d/init.el=
+
+#+BEGIN_SRC lisp
+(package-initialize)
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+;; Package Management
+;; -----------------------------------------------------------------
+(require 'init-packages)
+#+END_SRC
+
+模块化其实非常简单，我们要做的就是把某一个更改编辑器某个特定部分（例如，插件管理，显示层，快捷键绑定等）的配置代码写入一个独立的文件中并在末尾为其添加 =(provide 'modul-name)= (这里我们的模块名为 =init-packages= ) ，然后再在入口文件中将其引用既可。
+
+这里需要注意的是，我们在入口文件中使用了 =(add-to-list 'load-path "~/.emacs.d/lisp/")= 它可以让 Emacs 找到模块的位置。
 
 ** Major 与 Minor Mode 详解
 
