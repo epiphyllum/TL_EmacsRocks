@@ -1,6 +1,6 @@
 * Spacemacs Rocks 第二季
 
-#+CAPTION: Artwork 
+#+CAPTION: Spacemacs Rocks Artwork
 [[./Artwork.png]]
 
 在这一季中我们计划用 21 天的时间内学习 Emacs 以及 Spacemacs 的使用。从基础安装开始到可以运用到工作生产环节中。为了确保学习质量，请务必完成和理解计划中的每一项学习任务。
@@ -145,7 +145,7 @@ Emacs 的配置文件默认保存在 =~/.emacs.d/init.el= 文件中。（如果�
 
 *** 插件管理
 
-使用默认的插件管理系统（可在菜单栏中找到 =Options > Manage Emacs Packages= 中），安装 [[http://company-mode.github.io/][=Company=]] 插件，他是一个用于代码补全的插件。它的名字代表补全一切的意思（Complete Anything）。因为默认的插件管理系统提供的插件十分有限，所以我们会在之后的几天中继续将其强化。
+使用默认的插件管理系统（可在菜单栏中找到 =Options > Manage Emacs Packages= 中），安装 [[http://company-mode.github.io/][Company]] 插件，他是一个用于代码补全的插件。它的名字代表补全一切的意思（Complete Anything）。因为默认的插件管理系统提供的插件十分有限，所以我们会在之后的几天中继续将其强化。
 
 使用的下面的配置将 Comany-mode 在全局模式下激活
 
@@ -176,7 +176,7 @@ Emacs 的配置文件默认保存在 =~/.emacs.d/init.el= 文件中。（如果�
 
 如果你想深入学习 Emacs Lisp 可以阅读 GNU 提供的 [[https://www.gnu.org/software/emacs/manual/html_mono/eintr.html][An Introduction to Programming in Emacs Lisp]] 。（ =M-x info= 然后选择 Emacs Lisp Intro）
 
-我们先解决前一天中遇到的一些问题。首先是区分 =setq= 与 =setq-default= 的区别，=setq= 为设置当前缓冲区（Buffer）中的变量值，=setq-default= 设置的为全局的变量的值（具体内容可以在 [[http://stackoverflow.com/questions/18172728/the-difference-between-setq-and-setq-default-in-emacs-lisp][StackOverflow 找到]]）。下面是一个例子，用于设置光标样式的方法。
+我们先解决前一天中遇到的一些问题。首先是区分 =setq= 与 =setq-default= 的区别， =setq= 为设置当前缓冲区（Buffer）中的变量值， =setq-default= 设置的为全局的变量的值（具体内容可以在 [[http://stackoverflow.com/questions/18172728/the-difference-between-setq-and-setq-default-in-emacs-lisp][StackOverflow 找到]]）。下面是一个例子，用于设置光标样式的方法。
 
 #+BEGIN_EXAMPLE
     (setq-default cursor-type 'bar)
@@ -282,7 +282,7 @@ Emacs 的配置文件默认保存在 =~/.emacs.d/init.el= 文件中。（如果�
       (exec-path-from-shell-initialize))
 #+END_EXAMPLE
 
-关于上面这段配置代码有几个知识点，首先就是这段配置文件中用到了 =loop for ... in=，它来自 =cl= 既 Common Lisp 扩展。=for=, =in=, =collection= 均为 =cl-loop= 中的保留关键字。下面是一些简单的 =cl-loop= 的使用示例，
+关于上面这段配置代码有几个知识点，首先就是这段配置文件中用到了 =loop for ... in= ，它来自 =cl= 既 Common Lisp 扩展。 =for= , =in=, =collection= 均为 =cl-loop= 中的保留关键字。下面是一些简单的 =cl-loop= 的使用示例，
 
 #+BEGIN_SRC lisp
     ;; 遍历每一个缓冲区（Buffer）
@@ -326,7 +326,7 @@ Emacs 的配置文件默认保存在 =~/.emacs.d/init.el= 文件中。（如果�
     (setq package-selected-packages (quote YOUR_NAME_HERE/packages))
 #+END_SRC
 
-第一种设置是在缓冲区中设置一个名为 =package-selected-packages= 的变量，将其的值设定为 =YOUR_NAME_HERE/packages= 变量的值。第二种和第三种其实是完全相同的，将一个名为 =package-selected-packages= 的变量设置为 =YOUR_NAME_HERE/packages=。
+第一种设置是在缓冲区中设置一个名为 =package-selected-packages= 的变量，将其的值设定为 =YOUR_NAME_HERE/packages= 变量的值。第二种和第三种其实是完全相同的，将一个名为 =package-selected-packages= 的变量设置为 =YOUR_NAME_HERE/packages= 。
 
 我们可以用下面代码将 Emacs 设置为开启默认全屏，
 
@@ -366,11 +366,11 @@ Emacs 的配置文件默认保存在 =~/.emacs.d/init.el= 文件中。（如果�
 -  [[https://github.com/abo-abo/swiper][Swiper & Counsel]]
 -  [[https://github.com/Fuco1/smartparens][smartparens]]
 
-使用 =M-x customize-group= 后选择对应的插件名称，可以进入可视化选项区对指定的插件做自定义设置。当选择 Save for future session 后，刚刚做的设计就会被保存在你的配置文件（=init.el=）中。关于各个插件的安装与使用方法通常都可以在其官方页面找到（GitHub Pages 或者是项目仓库中的 README 文件）。我们强烈建议大家在安装这些插件后阅读使用方法来更好的将它们使用到你的日常工作当中使效率最大化。
+使用 =M-x customize-group= 后选择对应的插件名称，可以进入可视化选项区对指定的插件做自定义设置。当选择 Save for future session 后，刚刚做的设计就会被保存在你的配置文件（ =init.el= ）中。关于各个插件的安装与使用方法通常都可以在其官方页面找到（GitHub Pages 或者是项目仓库中的 README 文件）。我们强烈建议大家在安装这些插件后阅读使用方法来更好的将它们使用到你的日常工作当中使效率最大化。
 
 *** JavaScript IDE
 
-Emacs 提供的默认 JavaScript Major Mode 并不是非常好用。所以我们可以将默认的模式替换成 [[https://github.com/mooz/js2-mode][=js2-mode=]] 一个比默认模式好用的 Major Mode。我们可以通过 MELPA 来下载它，然后用下面的代码将其启用。
+Emacs 提供的默认 JavaScript Major Mode 并不是非常好用。所以我们可以将默认的模式替换成 [[https://github.com/mooz/js2-mode][js2-mode]] 一个比默认模式好用的 Major Mode。我们可以通过 MELPA 来下载它，然后用下面的代码将其启用。
 
 #+BEGIN_EXAMPLE
     (setq auto-mode-alist
@@ -381,7 +381,7 @@ Emacs 提供的默认 JavaScript Major Mode 并不是非常好用。所以我们
 
 你可以在[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Auto-Major-Mode.html][这里]]（How Emacs Chooses a Major Mode）找到 Emacs 是如何选择何时该选用何种 Major Mode 的方法。
 
-在这里我们需要知道 =auto-mode-alist= 的作用，这个变量是一个 [[https://www.emacswiki.org/emacs/AssociationList][=AssociationList=]]，它使用正则表达式（REGEXP）的规则来匹配不同类型文件应使用的 Major Mode 。 下面是几个正则表达式匹配的例子，
+在这里我们需要知道 =auto-mode-alist= 的作用，这个变量是一个 [[https://www.emacswiki.org/emacs/AssociationList][AssociationList]]，它使用正则表达式（REGEXP）的规则来匹配不同类型文件应使用的 Major Mode 。 下面是几个正则表达式匹配的例子，
 
 #+BEGIN_SRC lisp
     (("\\`/tmp/fol/" . text-mode)
@@ -458,7 +458,7 @@ Emacs 提供的默认 JavaScript Major Mode 并不是非常好用。所以我们
 
 -  =C-c C-s= 选择想要完成的时间
 -  =C-c C-d= 选择想要结束的时间
--  =C-c a= 可以打开 Agenda 模式菜单并选择不同的可视方式（=r=
+-  =C-c a= 可以打开 Agenda 模式菜单并选择不同的可视方式（ =r= ）
 
 * 第三天：配置文件模块化及使用优化
 
