@@ -717,7 +717,7 @@ custome.el              # 存放使用编辑器接口产生的配置信息
              (message "Indent buffer."))))))
 #+END_SRC
 
-然后再将其用下面的代码将其绑定为快捷键， =\= 用于将下一个 =\= 逃脱（escape）。
+然后再将其用下面的代码将其绑定为快捷键，第一个 =\= 用于将下一个 =\= 逃脱（escape）。
 
 #+BEGIN_SRC lisp
 (global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
@@ -732,7 +732,7 @@ custome.el              # 存放使用编辑器接口产生的配置信息
   (define-abbrev-table 'global-abbrev-table '(
                                               ;; Shifu
                                               ("8zl" "zilongshanren")
-                                              ;; contributor
+                                              ;; Tudi
                                               ("8lxy" "lixinyang")
                                              ))
 #+END_SRC
@@ -802,14 +802,13 @@ Dired Mode 是一个强大的模式它能让我们完成和文件管理相关的
 (require 'dired-x)
 #+END_SRC
 
-使用 =(setq dired-dwin-target t)= 则可以使当一个窗口（frame）中存在两个分屏（window）时，将另- ==
-- ==一个分屏自动设置成拷贝地址的目标。
+使用 =(setq dired-dwin-target t)= 则可以使当一个窗口（frame）中存在两个分屏（window）时，将另一个分屏自动设置成拷贝地址的目标。
 
-最后如果你是 Mac OS X 的用户，可以安装 =reveal-in-osx-finder= 这个插件，他可以将任意文件直接在 Finder 中打开。你要做的就是将其添加至，第二天的插件列表中即可，下载运行 Emacs 时，它就会自动帮你完成下载。
+最后如果你是 Mac OS X 的用户，可以安装 =reveal-in-osx-finder= 这个插件（你可以在[[https://melpa.org/#/reveal-in-osx-finder][这里]]找到它），他可以将任意文件直接在 Finder 中打开。你要做的就是将其添加至，第二天的插件列表中即可，下载运行 Emacs 时，它就会自动帮你完成下载。
 
 ** Org-mode 管理 Emacs 配置
 
-Org-mode 下的文学编程将颠覆你对于 Emacs 的看法。我们也可以使用 Org 来管理 Emacs 的配置文件（笔者和师傅其实更倾向于模块管理配置文件）。
+Org-mode 下的文学编程将颠覆你对于 Emacs 的看法。因为我们也可以使用 Org 来管理 Emacs 的配置文件（笔者和师傅其实更倾向于模块管理配置文件）。
 
 你需要将下面的代码放入配置入口文件（=init.el=）中，
 
