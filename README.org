@@ -817,7 +817,7 @@ Dired Mode 是一个强大的模式它能让我们完成和文件管理相关的
 
 使用 =(setq dired-dwin-target t)= 则可以使当一个窗口（frame）中存在两个分屏（window）时，将另一个分屏自动设置成拷贝地址的目标。
 
-最后如果你是 Mac OS X 的用户，可以安装 =reveal-in-osx-finder= 这个插件（你可以在[[https://melpa.org/#/reveal-in-osx-finder][这里]]找到它），他可以将任意文件直接在 Finder 中打开。你要做的就是将其添加至，第二天的插件列表中即可，下载启动 Emacs 时，它就会自动帮你完成下载。
+最后如果你是 Mac OS X 的用户，可以安装 =reveal-in-osx-finder= 这个插件（你可以在[[https://melpa.org/#/reveal-in-osx-finder][这里]]找到它），他可以将任意文件直接在 Finder 中打开。你要做的就是将其添加至第二天视频中提到的插件列表中即可（现在它位于我们模块化的 ~init-packages.el~ 文件中），下载启动 Emacs 时，它就会自动帮你完成下载。
 
 ** Org-mode 管理 Emacs 配置
 
