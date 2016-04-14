@@ -7,8 +7,8 @@ rm -rf public
 mkdir public
 
 # config
-git config user.email "nobody@nobody.com"
-git config user.name "Travis CI"
+git config --global user.email "nobody@nobody.com"
+git config --global user.name "Travis CI"
 
 # make
 pandoc README.org -o ./public/index.html
