@@ -1,4 +1,6 @@
 script: bash ./deploy.sh
+before_install:
+  - sudo apt-get install pandoc
 env:
   global:
   - GITHUB_REPO: li-xinyang/TL_EmacsRocks.git
