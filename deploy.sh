@@ -19,13 +19,10 @@ cd ..
 # Clean out existing contents
 rm -rf out/**/* || exit 0
 
-# Run our compile script
-curl https://api.csswg.org/bikeshed/ -f -F file=@index.bs > out/index.html;
-
 # Now let's go have some fun with the cloned repo
 cd out
 git config user.name "Travis CI"
-git config user.email "d@domenic.me"
+git config user.email "x0003000x@gmail.com"
 
 # If there are no changes (e.g. this is a README update) then just bail.
 if [ -z `git diff --exit-code` ]; then
