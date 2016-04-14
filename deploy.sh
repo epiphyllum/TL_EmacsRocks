@@ -1,37 +1,20 @@
 #!/bin/bash
-set -e # exit with nonzero exit code if anything fails
+# See https://medium.com/@nthgergo/publishing-gh-pages-with-travis-ci-53a8270e87db
+set -o errexit
 
-SOURCE_BRANCH="master"
-TARGET_BRANCH="gh-pages"
+rm -rf public
+mkdir public
 
-# Save some useful information
-REPO=`git config remote.origin.url`
-REPO_WITH_TOKEN=${REPO/https:\/\/github.com\//https://${GH_TOKEN}@github.com/}
-SHA=`git rev-parse --verify HEAD`
+# config
+git config --global user.email "nobody@nobody.org"
+git config --global user.name "Travis CI"
 
-# Clone the existing gh-pages for this repo into out/
-# Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deply)
-git clone $REPO out
-cd out
-git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
-cd ..
+# build (CHANGE THIS)
+make
 
-# Clean out existing contents
-rm -rf out/**/* || exit 0
-
-# Now let's go have some fun with the cloned repo
-cd out
-git config user.name "Travis CI"
-git config user.email "x0003000x@gmail.com"
-
-# If there are no changes (e.g. this is a README update) then just bail.
-if [ -z `git diff --exit-code` ]; then
-    echo "No changes to the spec on this push; exiting."
-    exit 0
-fi
-
-# Commit the "changes", i.e. the new version.
-# The delta will show diffs between new and old versions.
+# deploy
+cd public
+git init
 git add .
-git commit -m "Deploy to GitHub Pages: ${SHA}"
-git push $REPO_WITH_TOKEN $TARGET_BRANCH
+git commit -m "Deploy to Github Pages"
+git push --force --quiet "https://${GITHUB_TOKEN}@$github.com/${GITHUB_REPO}.git" master:gh-pages > /dev/null 2>&1
