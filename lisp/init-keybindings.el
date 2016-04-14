@@ -42,4 +42,13 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
 
+;; Code Indentation
+;; -------------------------------------------------------------------
+(global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
+
+;; Hippie Expand
+;; -------------------------------------------------------------------
+(global-set-key (kbd "s-/") 'hippie-expand)
+
+
 (provide 'init-keybindings)
