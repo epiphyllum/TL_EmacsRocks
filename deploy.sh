@@ -10,7 +10,7 @@ git config --global user.email "nobody@nobody.com"
 git config --global user.name "Travis CI"
 
 # make
-pandoc README.org -o index.html
+pandoc README.org -o ./public/index.html
 
 # deploy
 cd public
