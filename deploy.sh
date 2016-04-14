@@ -9,9 +9,6 @@ mkdir public
 git config --global user.email "nobody@nobody.com"
 git config --global user.name "Travis CI"
 
-# build (CHANGE THIS)
-make
-
 # deploy
 cd public
 git init
