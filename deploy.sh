@@ -12,7 +12,7 @@ git config --global user.name "Travis CI"
 
 # make
 emacs README.org --batch -f org-html-export-to-html --kill
-mv README.html index.html
+mv README.html ./public/index.html
 
 # deploy
 cd public
