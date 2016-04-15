@@ -8,6 +8,9 @@
 #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
 #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
 
+#+AUTHOR: zilongshanren
+#+CREATOR: li-xinyang
+#+title: Master Emacs in 21 Days
 
 * Spacemacs Rocks 第二季
 
