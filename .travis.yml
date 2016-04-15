@@ -1,6 +1,8 @@
 script: bash ./deploy.sh
 before_install:
-  - sudo apt-get install emacs
+  - sudo apt-add-repository ppa:ubuntu-elisp/ppa
+  - sudo apt-get update
+  - sudo apt-get install emacs-snapshot
 env:
   global:
   - GH_REF: github.com/li-xinyang/TL_EmacsRocks.git

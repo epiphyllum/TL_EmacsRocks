@@ -7,7 +7,7 @@ rm -rf public
 mkdir public
 
 # config
-git config --global user.email "nobody@nobody.com"
+git config --global user.email "nobody@li-xinyang.com"
 git config --global user.name "Travis CI"
 
 # make
