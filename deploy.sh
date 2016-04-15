@@ -11,7 +11,8 @@ git config --global user.email "nobody@nobody.com"
 git config --global user.name "Travis CI"
 
 # make
-pandoc README.org -o ./public/index.html
+emacs README.org --batch -f org-html-export-to-html --kill
+mv README.html index.html
 
 # deploy
 cd public
