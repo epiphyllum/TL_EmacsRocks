@@ -1,0 +1,1486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Master Emacs in 21 Days</title>
+<!-- 2016-04-15 Fri 02:35 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="zilongshanren" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Master Emacs in 21 Days</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Spacemacs Rocks 第二季</a></li>
+<li><a href="#sec-2">2. 第一天：准备开始</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-2-0-1">2.0.1. 基础操作</a></li>
+<li><a href="#sec-2-0-2">2.0.2. 内置功能</a></li>
+<li><a href="#sec-2-0-3">2.0.3. 学习基础 Elisp</a></li>
+<li><a href="#sec-2-0-4">2.0.4. 开始 Hacking！</a></li>
+<li><a href="#sec-2-0-5">2.0.5. 插件管理</a></li>
+<li><a href="#sec-2-0-6">2.0.6. Org-mode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. 第二天：高级自定义</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-3-0-1">3.0.1. Emacs 也很美</a></li>
+<li><a href="#sec-3-0-2">3.0.2. JavaScript IDE</a></li>
+<li><a href="#sec-3-0-3">3.0.3. Org-mode 进阶</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-4">4. 第三天：配置文件模块化（上）</a>
+<ul>
+<li><a href="#sec-4-1">4.1. 多文件存储配置文件(上)</a></li>
+<li><a href="#sec-4-2">4.2. Major 与 Minor Mode 详解</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. 第四天：配置文件模块化（下）以及使用优化</a>
+<ul>
+<li><a href="#sec-5-1">5.1. 配置文件模块化（下）</a></li>
+<li><a href="#sec-5-2">5.2. 更好的默认设置</a>
+<ul>
+<li><a href="#sec-5-2-1">5.2.1. 代码缩进</a></li>
+<li><a href="#sec-5-2-2">5.2.2. 缩写补全</a></li>
+<li><a href="#sec-5-2-3">5.2.3. Hippie 补全</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-3">5.3. Dired Mode</a></li>
+<li><a href="#sec-5-4">5.4. Org-mode 管理 Emacs 配置</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Spacemacs Rocks 第二季</h2>
+<div class="outline-text-2" id="text-1">
+
+<div class="figure">
+<p><img src="./Artwork.png" alt="Artwork.png" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Spacemacs Rocks Artwork</p>
+</div>
+
+<p>
+在这一季中我们计划用 21 天的时间内学习 Emacs 以及 Spacemacs 的使用。从基础安装开始到可以运用到工作生产环节中。为了确保学习质量，请务必完成和理解计划中的每一项学习任务。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 第一天：准备开始</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+视频地址如下
+</p>
+
+<ul class="org-ul">
+<li><a href="http://v.youku.com/v_show/id_XMTUwNjU0MjE0OA==.html">优酷视频</a>
+</li>
+<li><a href="http://pan.baidu.com/s/1gep9DQV">百度网盘</a>
+</li>
+<li><a href="https://www.youtube.com/watch?v=2Q0MhOR59u8">YouTube</a>
+</li>
+</ul>
+
+<p>
+<b>说在最前面</b>
+</p>
+
+<p>
+如果你第一次听说 Emacs 你可以在<a href="http://emacs.sexy/">性感的 Emacs（Emacs is Sexy）</a>一文中找到使用它的理由！我相信你一定被它的强大所吸引。
+</p>
+
+<p>
+如果你还没有安装 Emacs 可以在 <a href="http://emacsformacosx.com/builds">Mac OS X 安装链接</a>以及 <a href="http://emacsbinw64.sourceforge.net/">Window 安装链接</a>找到它。
+</p>
+
+<p>
+在开始本教程之前请务必先完成 Emacs 提供的官方教程（完成时间大约 30 分钟），它可以通过使用 <code>C-h t</code> （同时按住 Ctrl 与 h 键，接着按 t 键 <code>t</code> 在这里代表 tutorial ） 在 Emacs 中直接将其打开。
+</p>
+
+<p>
+Elisp 是 Emacs 所用的编程语言，你可以在阅读<a href="https://learnxinyminutes.com/docs/elisp/">这篇教程（Learn X in Y Minutes）</a>后很快的了解它的基础用法。
+</p>
+</div>
+
+<div id="outline-container-sec-2-0-1" class="outline-4">
+<h4 id="sec-2-0-1"><span class="section-number-4">2.0.1</span> 基础操作</h4>
+<div class="outline-text-4" id="text-2-0-1">
+<p>
+因为 Control 键在 Emacs 中极为常用所以为了更方便的使用 Emacs 的键位修改，需要对其做出修改。建议将大写锁定键（Caps Lock）替换为 Control 键。各个系统下的具体修改方式请自行搜索。
+</p>
+
+<p>
+常见符号所代表的意义如下
+</p>
+
+<ul class="org-ul">
+<li>M(eta)，在 Mac 下为 Option 键
+</li>
+<li>s(uper)，在 Mac 环境下为左 Command 键
+</li>
+<li>S(Shift)
+</li>
+<li>C(trl)
+</li>
+</ul>
+
+<p>
+光标的移动是编辑器中最常用的操作所以必须熟知。
+</p>
+
+<ul class="org-ul">
+<li><code>C-f</code> 为前移一个字符， <code>f</code> 代表 forward。
+</li>
+<li><code>C-b</code> 为后移一个字符， <code>b</code> 代表 backward。
+</li>
+<li><code>C-p</code> 为上移至前一行， <code>p</code> 代表 previous。
+</li>
+<li><code>C-n</code> 为上移至下一行， <code>n</code> 代表 next。
+</li>
+<li><code>C-a</code> 为移至行首， <code>a</code> 可以理解为最前端。
+</li>
+<li><code>C-e</code> 为移至行尾， <code>e</code> 代表 end。
+</li>
+</ul>
+
+<p>
+常用的文件操作快捷键组合也必须熟记。
+</p>
+
+<ul class="org-ul">
+<li><code>C-x C-f</code> 为打开目标文件， <code>f</code> 代表 find/file
+</li>
+<li><code>C-x C-s</code> 为保存当前缓冲区（Buffer）， <code>s</code> 代表 save
+</li>
+</ul>
+
+<p>
+打断组合键为 <code>C-g</code> 用于终端取消之前的指令。快捷键就是用预先绑定好的方式告诉 Emacs 去执行指定的命令。（之后会介绍到更多有关绑定的内容）
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-0-2" class="outline-4">
+<h4 id="sec-2-0-2"><span class="section-number-4">2.0.2</span> 内置功能</h4>
+<div class="outline-text-4" id="text-2-0-2">
+<p>
+Emacs 功能强大，但是部分功能默认情况下并为开启。下面做有几个例子，
+</p>
+
+<p>
+编辑器内显示行号可使用 <code>M-x linum-mode</code> 来开启。
+</p>
+
+<p>
+<b>获取帮助</b>
+</p>
+
+<p>
+Emacs 是一个富文档编辑器（Self document, extensible editor）而下面的三种方法在学习 Emacs 的过程中也非常重要。他们分别是，
+</p>
+
+<ul class="org-ul">
+<li><code>C-h k</code> 寻找快捷键的帮助信息
+</li>
+<li><code>C-h v</code> 寻找变量的帮助信息
+</li>
+<li><code>C-h f</code> 寻找函数的帮助信息
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-0-3" class="outline-4">
+<h4 id="sec-2-0-3"><span class="section-number-4">2.0.3</span> 学习基础 Elisp</h4>
+<div class="outline-text-4" id="text-2-0-3">
+<p>
+请务必完成<a href="https://learnxinyminutes.com/docs/elisp/">这篇教程（Learn X in Y Minutes）</a>来了解 Elisp 的使用（阅读时间大约 15 分钟），你也可以在<a href="https://learnxinyminutes.com/docs/zh-cn/elisp-cn/">这里</a>找到它的中文版。Elisp 为一个函数式的语言其，所以它全部功能都是由函数来实现的。
+</p>
+
+<p>
+下面为一些简单的例子
+</p>
+
+<pre class="example">
+;; 2 + 2
+(+ 2 2)
+
+;; 2 + 3 * 4
+(+ 2 (* 3 4))
+
+;; 定义变量
+(setq name "username")
+(messasge name) ; -&gt; "username"
+
+;; 定义函数
+(defun func()
+  (message "Hello, %s" username))
+
+;; 执行函数
+(func) ; -&gt; Hello, usernam
+
+;; 设置快捷键
+(global-set-key (kbd "&lt;f1&gt;") 'func)
+
+;; 使函数可直接被调用可添加 (interactive)
+(defun func()
+  (interactive)
+  (message "Hello, %s" username))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-0-4" class="outline-4">
+<h4 id="sec-2-0-4"><span class="section-number-4">2.0.4</span> 开始 Hacking！</h4>
+<div class="outline-text-4" id="text-2-0-4">
+<p>
+Emacs 的配置文件默认保存在 <code>~/.emacs.d/init.el</code> 文件中。（如果其不存在可自行创建，配置文件也可保存在 <code>~/.emacs</code> 文件中，他们之间的区别我们会在后面做讨论）
+</p>
+
+<p>
+在开始配置之前让我们先来区别 Emacs 中 Major Mode 与 Minor Mode 的区别。Major Mode 通常是定义对于一种文件类型编辑的核心规则，例如语法高亮、缩进、快捷键绑定等。而 Minor Mode 是除去 Major Mode 所提供的核心功能以外的额外编辑功能（辅助功能）。例如在下面的配置文件中 <code>tool-bar-mode</code> 与 <code>linum-mode</code> 等均为 Minor Mode*。
+</p>
+
+<p>
+简单来说就是，一种文件类型同时只能存在一种 Major Mode 但是它可以同时激活一种或多种 Minor Mode。如果你希望知道当前的模式信息，可以使用 <code>C-h m</code> 来显示当前所有开启的全部 Minor Mode 的信息。
+</p>
+
+<p>
+<b>简单的编辑器自定义</b>
+</p>
+
+<p>
+下面是一些简单的编辑器配置信息，你需要做的就是将其写入你的配置文件中（ <code>~/.emacs.d/init.el</code> ）即可。
+</p>
+
+<pre class="example">
+;; 关闭工具栏 tool-bar-mode 即为一个 Minor Mode
+(tool-bar-mode -1)
+
+;; 关闭文件滑动控件
+(scroll-bar-mode -1)
+
+;; 显示行号
+(global-linum-mode t)
+
+;; 更改光标的样式（不能生效，解决方案见第二集）
+(setq cursor-type 'bar)
+
+;; 关闭启动帮助画面
+(setq inhibit-splash-screen t)
+
+;; 关闭缩进 (第二天中被去除)
+;; (electric-indent-mode -1)
+
+;; 更改显示字体大小 16pt
+;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
+(set-face-attribute 'default nil :height 160)
+
+;; 快速打开配置文件
+(def open-init-file()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+;; 这种快捷键，将函数 open-init-file 绑定 &lt;f2&gt; 键
+(global-set-key (kbd "&lt;f2&gt;") 'open-init-file)
+</pre>
+
+<p>
+在每次编辑配置文件后，刚刚做的修改并不会立刻生效。这时你需要重启编辑器或者重新加载配置文件。重新加载配置文件你需要在当前配置文件中使用 <code>M-x load-file</code> 双击两次回车确认默认文件名，或者使用 <code>M-x eval-buffer</code> 去执行当前缓冲区的所以 Lisp 命令。你也可以使用 <code>C-x C-e</code> 来执行某一行的 Lisp 代码。这些可使刚刚修改的配置文件生效。当然你也可以将他们绑定为快捷键。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-0-5" class="outline-4">
+<h4 id="sec-2-0-5"><span class="section-number-4">2.0.5</span> 插件管理</h4>
+<div class="outline-text-4" id="text-2-0-5">
+<p>
+使用默认的插件管理系统（可在菜单栏中找到 <code>Options &gt; Manage Emacs Packages</code> 中），安装 <a href="http://company-mode.github.io/">Company</a> 插件，他是一个用于代码补全的插件。它的名字代表补全一切的意思（Complete Anything）。因为默认的插件管理系统提供的插件十分有限，所以我们会在之后的几天中继续将其强化。
+</p>
+
+<p>
+使用的下面的配置将 Comany-mode 在全局模式下激活
+</p>
+
+<pre class="example">
+; 开启全局 Company 补全
+(global-company-mode t)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-0-6" class="outline-4">
+<h4 id="sec-2-0-6"><span class="section-number-4">2.0.6</span> Org-mode</h4>
+<div class="outline-text-4" id="text-2-0-6">
+<p>
+简单的 Org-mode 的使用，它可以列出提纲并方便的使用 <code>tab</code> 键来对其经行展开与关闭。 <code>C-c C-t</code> 可以将一个条目转换成一条待办事件。
+</p>
+
+<pre class="example">
+* 为一级标题
+** 为二级标题
+*** 为三级标题并以此类推
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 第二天：高级自定义</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+视频地址如下
+</p>
+
+<ul class="org-ul">
+<li><a href="http://v.youku.com/v_show/id_XMTUxMzQyODI4MA==.html">优酷视频</a>
+</li>
+<li><a href="http://pan.baidu.com/s/1c2Cw9ck">百度网盘</a>
+</li>
+<li><a href="https://youtu.be/aQRZxaU3pAI">YouTube</a>
+</li>
+</ul>
+
+<p>
+<b>说在最前面</b>
+</p>
+
+<p>
+如果你想深入学习 Emacs Lisp 可以阅读 GNU 提供的 <a href="https://www.gnu.org/software/emacs/manual/html_mono/eintr.html">An Introduction to Programming in Emacs Lisp</a> 。（ <code>M-x info</code> 然后选择 Emacs Lisp Intro）
+</p>
+
+<p>
+我们先解决前一天中遇到的一些问题。首先是区分 <code>setq</code> 与 <code>setq-default</code> 的区别， <code>setq</code> 为设置当前缓冲区（Buffer）中的变量值， <code>setq-default</code> 设置的为全局的变量的值（具体内容可以在 <a href="http://stackoverflow.com/questions/18172728/the-difference-between-setq-and-setq-default-in-emacs-lisp">StackOverflow 找到</a>）。下面是一个例子，用于设置光标样式的方法。
+</p>
+
+<pre class="example">
+(setq-default cursor-type 'bar)
+</pre>
+
+<p>
+今天我们需要将第一天关闭的自动缩进(<code>electric-indent-mode</code>)从配置文件中去除，它是 Emacs 24.4 中加入的新特性，你可以在这篇<a href="http://emacsredux.com/blog/2014/01/19/a-peek-at-emacs-24-dot-4-auto-indentation-by-default/">文章</a>中找到更多关于它的内容。我们之前关闭它是因为，它存在不理想的缩进效果（在Eli 中用分号做注释时 <code>fancy-comment</code> 会造成很远的缩进，其实解决方法是使用 Elisp 推荐的两个分号而不是一个 <code>;;</code> ，这样就可以避免这个问题。于是我们也就将其从配置文件中删除）
+</p>
+
+<p>
+因为通常我们的配置文件以及项目文件均使用版本控制系统，所以自动生成的备份文件就显得有些多余。我们还可以禁止 Emacs 自动生成备份文件，例如 <code>init.el~</code> 。（ <code>~</code> 为后缀的文件为自动生成的备份文件）我们可以使用下面的方法将其关闭。
+</p>
+
+<pre class="example">
+(setq make-backup-files nil)
+</pre>
+
+<p>
+关于分屏的使用，如果你已经读过 Emacs 自带的教程，现在你应该已经掌握了基本的分屏操作方法了。关于分屏的更多内容你可以在<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Split-Window.html">这里</a>找到。
+</p>
+
+<ul class="org-ul">
+<li><code>C-x 1</code> 仅保留当前窗口
+</li>
+<li><code>C-x 2</code> 将当前窗口分到上边
+</li>
+<li><code>C-x 3</code> 将当前窗口分到右边
+</li>
+</ul>
+
+<p>
+使用下面的配置来加入最近打开过文件的选项让我们更快捷的在图形界面的菜单中打开最近编辑过的文件。
+</p>
+
+<pre class="example">
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-item 10)
+
+;; 这个快捷键绑定可以用之后的插件 counsel 代替
+;; (global-set-key "\C-x\ \C-r" 'recent-open-files)
+</pre>
+
+<p>
+<code>require</code> 的意思为从文件中加载特性，你可以在杀哥的网站读到关于 Emacs Lisp 库系统的更多内容，文章在<a href="http://ergoemacs.org/emacs/elisp_library_system.html">这里</a>。
+</p>
+
+<p>
+使用下面的配置文件将删除功能配置成与其他图形界面的编辑器相同，
+</p>
+
+<pre class="example">
+(delete-selection-mode t)
+</pre>
+
+<p>
+下面的这些函数可以让你找到不同函数，变量以及快捷键所定义的文件位置。因为非常常用所以我们建议将其设置为与查找文档类似的快捷键（如下所示），
+</p>
+
+<ul class="org-ul">
+<li><code>find-function</code> （ <code>C-h C-f</code> ）
+</li>
+<li><code>find-variable</code> （ <code>C-h C-v</code> ）
+</li>
+<li><code>find-function-on-key</code> （ <code>C-h C-k</code> ）
+</li>
+</ul>
+
+<p>
+在我们进入下一个部分之间让我们来看看使用 <code>~/.emacs.d/init.el</code> 与 <code>~/.emacs</code> 的区别（更多关于他们区别的讨论可在<a href="http://emacs.stackexchange.com/questions/1/are-there-any-advantages-to-using-emacs-d-init-el-instead-of-emacs">这里</a>找到） 简单来说请使用前者因为它有下面的两个优点，
+</p>
+
+<ul class="org-ul">
+<li>它可以更好将所有 Emacs 相关的文件整合在一个目录内（干净的 <code>HOME</code> ，网盘备份等优点）
+</li>
+<li>更好的版本控制
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-3-0-1" class="outline-4">
+<h4 id="sec-3-0-1"><span class="section-number-4">3.0.1</span> Emacs 也很美</h4>
+<div class="outline-text-4" id="text-3-0-1">
+<p>
+<b>配置插件源</b>
+</p>
+
+<p>
+在进行美化之前我们需要配置插件的源（默认的源非常有限），最常使用的是 <a href="https://melpa.org/">MELPA</a> （Milkypostman's Emacas Lisp Package Archive）它有非常多的插件（3000 多个插件）。下载的次数并不能说明它非常有用，也许这个插件是其他的插件依赖。在<a href="https://melpa.org/#/getting-started">这里</a>你可以找到其安装使用方法。添加源后，我们就可以使用 <code>M-x package-list-packages</code> 来查看所有 MELPA 上的插件了。在表单中可以使用 <code>I</code> 来标记安装 <code>D</code> 来标记删除， <code>U</code> 来更新，并用 <code>X</code> 来确认。
+</p>
+
+<p>
+你可以直接将下面的代码复制到你的配置文件顶端，从而直接使用 Melpa 作为插件的源。你可以将你需要的插件名字写在 <code>YOUR_NAME_HERE/packages</code> 中，Emacs 在启动时会自动下载未被安装的插件。
+</p>
+
+<pre class="example">
+(when (&gt;= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+    )
+
+;; cl - Common Lisp Extension
+(require 'cl)
+
+;; Add Packages
+(defvar YOUR_NAME_HERE/packages '(
+               ;; --- Auto-completion ---
+               company
+               ;; --- Better Editor ---
+               hungry-delete
+               swiper
+               counsel
+               smartparens
+               ;; --- Major Mode ---
+               js2-mode
+               ;; --- Minor Mode ---
+               nodejs-repl
+               exec-path-from-shell
+               ;; --- Themes ---
+               monokai-theme
+               ;; solarized-theme
+               ) "Default packages")
+
+(setq package-selected-packages YOUR_NAME_HERE/packages)
+
+(defun YOUR_NAME_HERE/packages-installed-p ()
+    (loop for pkg in YOUR_NAME_HERE/packages
+          when (not (package-installed-p pkg)) do (return nil)
+          finally (return t)))
+
+(unless (YOUR_NAME_HERE/packages-installed-p)
+    (message "%s" "Refreshing package database...")
+    (package-refresh-contents)
+    (dolist (pkg YOUR_NAME_HERE/packages)
+      (when (not (package-installed-p pkg))
+        (package-install pkg))))
+
+;; Find Executable Path on OS X
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+</pre>
+
+<p>
+关于上面这段配置代码有几个知识点，首先就是这段配置文件中用到了 <code>loop for ... in</code> ，它来自 <code>cl</code> 既 Common Lisp 扩展。 <code>for</code> , <code>in</code>, <code>collection</code> 均为 <code>cl-loop</code> 中的保留关键字。下面是一些简单的 <code>cl-loop</code> 的使用示例，
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">;; 遍历每一个缓冲区（Buffer）
+(cl-loop for buf in (buffer-list)
+		 collection (buffer-file-name buf))
+
+;; 寻找 729 的平方根（设置最大为 100 为了防止无限循环）
+(cl-loop for x from 1 to 100
+		 for y = (* x x)
+		 until (&gt;= y 729)
+		 finally return (list x (= y 729)))
+</pre>
+</div>
+
+<p>
+你可以在<a href="http://www.gnu.org/software/emacs/manual/html_mono/cl.html#Loop-Facility">这里</a>找到更多关于循环的使用说明。
+</p>
+
+<p>
+其次就是它使用到了 <code>quote</code>, 它其实就是我们之前常常见到的 ='=（单引号）的完全体。因为它在 Lisp 中十分常用，所以就提供了简写的方法。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">;; 下面两行的效果完全相同的
+(quote foo)
+'foo
+</pre>
+</div>
+
+<p>
+<code>quote</code> 的意思是不要执行后面的内容，返回它原本的内容（具体请参考下面的例子）
+</p>
+
+<pre class="example">
+(print '(+ 1 1)) ;; -&gt; (+ 1 1)
+(print (+ 1 1))  ;; -&gt; 2
+</pre>
+
+<p>
+更多关于 <code>quote</code> 的内容可以在<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Quoting.html">这里</a>找到，或者在<a href="http://stackoverflow.com/questions/134887/when-to-use-quote-in-lisp">这里</a>找到 StackOverflow 上对于它的讨论。
+</p>
+
+<p>
+这样我们就可以区分下面三行代码的区别，
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">;; 第一种
+(setq package-selected-packages YOUR_NAME_HERE/packages)
+;; 第二种
+(setq package-selected-packages 'YOUR_NAME_HERE/packages)
+;; 第三种
+(setq package-selected-packages (quote YOUR_NAME_HERE/packages))
+</pre>
+</div>
+
+<p>
+第一种设置是在缓冲区中设置一个名为 <code>package-selected-packages</code> 的变量，将其的值设定为 <code>YOUR_NAME_HERE/packages</code> 变量的值。第二种和第三种其实是完全相同的，将一个名为 <code>package-selected-packages</code> 的变量设置为 <code>YOUR_NAME_HERE/packages</code> 。
+</p>
+
+<p>
+我们可以用下面代码将 Emacs 设置为开启默认全屏，
+</p>
+
+<pre class="example">
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
+</pre>
+
+<p>
+我们也可以启用自动括号匹配（Highlight Matching Parenthesis），随后会介绍插件来增强这个匹配的功能。你可以在<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html">这里</a>读到关于钩子的更多信息。
+</p>
+
+<pre class="example">
+(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+</pre>
+
+<p>
+高亮当前行，当文本内容很多时可以很容易找到光标的位置。
+</p>
+
+<pre class="example">
+(global-hl-line-mode t)
+</pre>
+
+<p>
+<b>安装主题</b>
+</p>
+
+<pre class="example">
+(add-to-list 'monokai-theme)
+</pre>
+
+<p>
+然后使用下面的配置使其每次打开编辑器时加载主题，
+</p>
+
+<pre class="example">
+(load-theme 'monokai t)
+</pre>
+
+<p>
+<b>推荐插件</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://company-mode.github.io/">company</a>
+</li>
+<li><a href="https://github.com/nflath/hungry-delete">hungry-delete</a>
+</li>
+<li><a href="https://github.com/nonsequitur/smex">Smex</a> (如果你使用 Counsel 来增强你的 <code>M-x</code> ，那么就不需要再安装 Smex 了)
+</li>
+<li><a href="https://github.com/abo-abo/swiper">Swiper &amp; Counsel</a>
+</li>
+<li><a href="https://github.com/Fuco1/smartparens">smartparens</a>
+</li>
+</ul>
+
+<p>
+使用 <code>M-x customize-group</code> 后选择对应的插件名称，可以进入可视化选项区对指定的插件做自定义设置。当选择 Save for future session 后，刚刚做的设计就会被保存在你的配置文件（ <code>init.el</code> ）中。关于各个插件的安装与使用方法通常都可以在其官方页面找到（GitHub Pages 或者是项目仓库中的 README 文件）。我们强烈建议大家在安装这些插件后阅读使用方法来更好的将它们使用到你的日常工作当中使效率最大化。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-0-2" class="outline-4">
+<h4 id="sec-3-0-2"><span class="section-number-4">3.0.2</span> JavaScript IDE</h4>
+<div class="outline-text-4" id="text-3-0-2">
+<p>
+Emacs 提供的默认 JavaScript Major Mode 并不是非常好用。所以我们可以将默认的模式替换成 <a href="https://github.com/mooz/js2-mode">js2-mode</a> 一个比默认模式好用的 Major Mode。我们可以通过 MELPA 来下载它，然后用下面的代码将其启用。
+</p>
+
+<pre class="example">
+(setq auto-mode-alist
+      (append
+       '(("\\.js\\'" . js2-mode))
+       auto-mode-alist))
+</pre>
+
+<p>
+你可以在<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Auto-Major-Mode.html">这里</a>（How Emacs Chooses a Major Mode）找到 Emacs 是如何选择何时该选用何种 Major Mode 的方法。
+</p>
+
+<p>
+在这里我们需要知道 <code>auto-mode-alist</code> 的作用，这个变量是一个 <a href="https://www.emacswiki.org/emacs/AssociationList">AssociationList</a>，它使用正则表达式（REGEXP）的规则来匹配不同类型文件应使用的 Major Mode 。 下面是几个正则表达式匹配的例子，
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(("\\`/tmp/fol/" . text-mode)
+ ("\\.texinfo\\'" . texinfo-mode)
+ ("\\.texi\\'" . texinfo-mode)
+ ("\\.el\\'" . emacs-lisp-mode)
+ ("\\.c\\'" . c-mode)
+ ("\\.h\\'" . c-mode)
+ …)
+</pre>
+</div>
+
+<p>
+下面是如何添加新的模式与对应文件类型的例子（与我们配置 <code>js2-mode</code> 时相似的例子），
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(setq auto-mode-alist
+  (append
+   ;; File name (within directory) starts with a dot.
+   '(("/\\.[^/]*\\'" . fundamental-mode)
+     ;; File name has no dot.
+     ("/[^\\./]*\\'" . fundamental-mode)
+     ;; File name ends in ‘.C’.
+     ("\\.C\\'" . c++-mode))
+   auto-mode-alist))
+</pre>
+</div>
+
+<p>
+在 <code>js2-mode</code> 模式中会提供
+</p>
+
+<ul class="org-ul">
+<li>语法高亮
+</li>
+<li>语法检查器（Linter）
+</li>
+</ul>
+
+<p>
+执行缓冲区的代码可以使用 <code>nodejs-repl</code> 插件，它需要你的机器上已经安装了 NodeJS。然而在 Mac OS X 上可能会出现找不到 NodeJS 可执行文件的问题，要解决这个问题你需要安装另外一个 <code>exec-path-from-shell</code> 的插件并将其启用。
+</p>
+
+<pre class="example">
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+</pre>
+
+<p>
+有了 <code>nodejs-repl</code> 我们就可以方便的测试和开发我们的 JavaScript 代码了（你可以在<a href="https://github.com/mooz/js2-mode">这里</a>找到更多关于它的使用方法）。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-0-3" class="outline-4">
+<h4 id="sec-3-0-3"><span class="section-number-4">3.0.3</span> Org-mode 进阶</h4>
+<div class="outline-text-4" id="text-3-0-3">
+<p>
+在 Org-mode 中你可以直接开启新的缓冲区（Buffer）直接用相应的 Major Mode 来编辑代码块内的内容。在代码块中使用 ~C-c '~ 会直接打开对应模式的缓冲区（不仅限于 Lisp）。这样就使在 Org-mode 中编辑代码变的十分方便快捷。
+</p>
+
+<p>
+使用 <code>&lt;s</code> 然后 Tab 可以直接插入代码块的代码片段（Snippet），更多类似的代码片段（Org-mode Easy Templates）可以在<a href="http://orgmode.org/manual/Easy-Templates.html">这里</a>找到。
+</p>
+
+<pre class="example">
+#+BEGIN_SRC emacs-lisp
+;; Your code goes here
+;; 你的代码写在这里
+#+END_SRC
+</pre>
+
+<p>
+<b>添加 Org-mode 文本内语法高亮</b>
+</p>
+
+<pre class="example">
+(require 'org)
+(setq org-src-fontify-natively t)
+</pre>
+
+<p>
+在 Org-mode 中重置有序列表序号可以直接使用 M-&lt;RET&gt; 。
+</p>
+
+<p>
+<b>Agenda 的使用</b>
+</p>
+
+<pre class="example">
+;; 设置默认 Org Agenda 文件目录
+(setq org-agenda-files '("~/org"))
+
+;; 设置 org-agenda 打开快捷键
+(global-set-key (kbd "C-c a") 'org-agenda)
+</pre>
+
+<p>
+你只需将你的 <code>*.org</code> 文件放入上面所指定的文件夹中就可以开始使用 Agenda
+模式了。
+</p>
+
+<ul class="org-ul">
+<li><code>C-c C-s</code> 选择想要完成的时间
+</li>
+<li><code>C-c C-d</code> 选择想要结束的时间
+</li>
+<li><code>C-c a</code> 可以打开 Agenda 模式菜单并选择不同的可视方式（ <code>r</code> ）
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 第三天：配置文件模块化（上）</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+视频地址如下
+</p>
+
+<ul class="org-ul">
+<li><a href="http://v.youku.com/v_show/id_XMTUyNzA0MTMxNg==.html?f=26962151&o=1">优酷视频</a>
+</li>
+<li><a href="http://pan.baidu.com/s/1nuJWyLF">百度网盘</a>
+</li>
+<li><a href="https://www.youtube.com/watch?v=Z83xnsiLtI0&feature=youtu.be">YouTube</a>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> 多文件存储配置文件(上)</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+将不同的配置代码放置到不同的文件中，使其模块化，这让我们的后续维护变得更加简单。下面是我们现在的 <code>~/.emacs.d/</code> 目录中的样子，
+</p>
+
+<pre class="example">
+├── auto-save-list # 自动生成的保存数据
+├── elpa           # 下载的插件目录
+├── init.el        # 我们的配置文件
+└── recentf        # 最近访问的文件列表
+</pre>
+
+<p>
+通常我们只保存配置文件和对其进行版本控制，其他的插件均为在第一次使用编辑器时再通过网络重新下载，当然你也可以选择将全部配置文件进行版本控制来保证自己时刻拥有最稳定的生产环境。
+</p>
+
+<p>
+Elisp 中并没有命名空间（Namespace），换句话说就是所有的变量均为全局变量，所以其命名方法就变的非常重要。下面是一个简单的命名规则，
+</p>
+
+<pre class="example">
+#自定义变量可以使用自己的名字作为命名方式（可以是变量名或者函数名）
+YourName/XXXX
+
+#模式命名规则
+ModeName-mode
+
+#模式内的变量则可以使用
+ModeName-VariableName
+</pre>
+
+<p>
+遵守上面的命名规则可以最大程度的减少命名冲突发生的可能性。
+</p>
+
+<p>
+现在我们想将原本混合在一起的配置文件分为下面的几个模块（每一个模块为一个独立的配置文件并将其保存在指定的子目录中），它们分别是
+</p>
+
+<pre class="example">
+init-packages.el        # 插件管理
+init-ui.el              # 视觉层配置
+init-better-defaults.el # 增强内置功能
+init-keybindings.el     # 快捷键绑定
+init-org.el             # Org 模式相关的全部设定
+custome.el              # 存放使用编辑器接口产生的配置信息
+</pre>
+
+<p>
+下面为将配置文件进行模块化后的目录结构，
+</p>
+
+<pre class="example">
+├── init.el
+└── lisp
+    ├── comstom.el
+    ├── init-better-defaults.el
+    ├── init-helper.el
+    ├── init-keybindings.el
+    ├── init-packages.el
+    ├── init-ui.el
+    └── init-org.el
+</pre>
+
+<p>
+使用模块化配置就可以让我们在之后的配置中迅速的定位与更改配置内容，让整个过程变得更有条理也更加高效。
+</p>
+
+<p>
+和之前一样 <code>init.el</code> 是配置文件的入口，现在它便成为了所有模块配置文件的入口，所以要使用这些模块时，我们需要在其中引用需要加载的模块。下面以 <code>init-packages.el</code> （此配置为添加插件的模块） 为例，详细说明如何模块化以及应用的方法。
+</p>
+
+<p>
+下面是在模块化配置之前，我们所使用的配置文件 <code>~/.emacs.d/init.el</code> 的样子，我们将所有的配置代码都放置在了同一个文件中（如下所示）
+</p>
+
+<p>
+下面为 <code>~/.emacs.d/init.el</code> 文件的内容
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">;;  __        __             __   ___
+;; |__)  /\  /  ` |__/  /\  / _` |__
+;; |    /~~\ \__, |  \ /~~\ \__&gt; |___
+;;                      __   ___        ___      ___
+;; |\/|  /\  |\ |  /\  / _` |__   |\/| |__  |\ |  |
+;; |  | /~~\ | \| /~~\ \__&gt; |___  |  | |___ | \|  |
+(when (&gt;= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") 1))
+
+;; cl - Common Lisp Extension
+(require 'cl)
+
+;; Add Packages
+(defvar xinyang/packages '(
+			   ;; --- Auto-completion ---
+			   company
+			   ;; --- Better Editor ---
+			   smooth-scrolling
+			   hungry-delete
+			   swiper
+			   counsel
+			   smartparens
+			   ;; --- Major Mode ---
+			   js2-mode
+			   markdown-mode
+			   ;; --- Minor Mode ---
+			   ;; Quick Note Taking
+			   deft
+			   ;; JavaScript REPL
+			   nodejs-repl
+			   ;; Find OS X Executable Helper Package
+;; ...
+</pre>
+</div>
+
+<p>
+之前为了更好的区分不同的区域我使用的方法是使用 ASCII Art 然后再以关键字来做搜索跳转，但是这样再编辑工程中依旧十分缓慢和麻烦。于是我们现在要将配置文件全部模块化，把不同部分的配置代码放置在不同的配置文件中，并在入口文件（ <code>~/.emacs.d/init.el</code> ）中依次引用不用的模块。
+</p>
+
+<p>
+下面为 <code>~/.emacs.d/lisp/init-packages.el</code> 模块中的代码
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">;;  __        __             __   ___
+;; |__)  /\  /  ` |__/  /\  / _` |__
+;; |    /~~\ \__, |  \ /~~\ \__&gt; |___
+;;                      __   ___        ___      ___
+;; |\/|  /\  |\ |  /\  / _` |__   |\/| |__  |\ |  |
+;; |  | /~~\ | \| /~~\ \__&gt; |___  |  | |___ | \|  |
+(when (&gt;= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") 1))
+
+;; cl - Common Lisp Extension
+(require 'cl)
+
+;; Add Packages
+(defvar xinyang/packages '(
+			   ;; --- Auto-completion ---
+			   company
+			   ;; --- Better Editor ---
+			   smooth-scrolling
+			   hungry-delete
+			   swiper
+			   counsel
+			   smartparens
+			   popwin
+			   ;; --- Major Mode ---
+			   js2-mode
+			   markdown-mode
+
+;; ...
+
+;; 文件末尾
+(provide 'init-packages)
+</pre>
+</div>
+
+<p>
+下面为 <code>~/.emacs.d/init.el</code> 入口文件中的代码
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(package-initialize)
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+;; Package Management
+;; -----------------------------------------------------------------
+(require 'init-packages)
+</pre>
+</div>
+
+<p>
+模块化要做的其实非常简单，我们要做的其实就是把某一个更改编辑器某定部分（例如，插件管理，显示层，快捷键绑定等）的配置代码写入一个独立的文件中并在末尾为其添加 <code>(provide 'modul-name)</code> (这里我们的模块名为 <code>init-packages</code> )使其可以在入口文件中被调用，然后再在入口文件中将其引用既可。
+</p>
+
+<p>
+这里需要注意的是，我们需要在入口文件中添加 <code>(add-to-list 'load-path "~/.emacs.d/lisp/")</code> 这可以让 Emacs 找到需要加载的模块所处的位置。
+</p>
+
+<p>
+更多模块化的配置文件可以在<a href="https://github.com/zilongshanren/Learning-Emacs/tree/day3">这里</a>找到。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Major 与 Minor Mode 详解</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+在这一节我们将详细介绍 Major Mode 与 Minor Mode 去区别。每一个文件类型都对应一个 Major Mode，它提供语法高亮以及缩进等基本的编辑支持功能，然后而 Minor Mode 则提供其余的增强性的功能（例如 <code>linum-mode</code> ）。
+</p>
+
+<p>
+在 Emacs 中，Major Mode 又分为三种，
+</p>
+
+<ul class="org-ul">
+<li><code>text-mode</code> ，用于编辑文本文件
+</li>
+<li><code>special-mode</code> ，特殊模式（很少见）
+</li>
+<li><code>prog-mode</code> ，所有的编程语言的父模式
+</li>
+</ul>
+
+<p>
+在每一个模式（mode）中它的名称与各个变量还有函数都是有特定的命名规则，比如所有的模式都被命名为 <code>ModeName-mode</code> ，里面所设置的快捷键则为 <code>ModeName-mode-key-map</code> ，而所有的钩子则会被命名为 <code>ModeName-mode-hook</code> 。
+</p>
+
+<p>
+注明：为了保持阅读的完整性，部分第三天的关于默认编辑器优化的内容被移至第四天。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> 第四天：配置文件模块化（下）以及使用优化</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+视频地址如下
+</p>
+
+<ul class="org-ul">
+<li><a href="http://v.youku.com/v_show/id_XMTUzMDAwMDYwMA==.html">优酷视频</a>
+</li>
+<li><a href="http://pan.baidu.com/s/1o8QWrHK">百度网盘</a>
+</li>
+<li><a href="https://www.youtube.com/watch?v=BGecmDgPAiw">YouTube</a>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> 配置文件模块化（下）</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+在这一部分我们首先需要知道的是什么是 <code>features</code> 。在 Emacs 中每一个 <code>feature</code> 都是一个 Elisp 符号，用于代表一个 Lisp 插件（Package）。
+</p>
+
+<p>
+当一个插件调用 <code>(provide 'symbol_name)</code> 函数时，Emacs 就会将这个符号加入到 <code>features</code> 的列表中去。你可以在<a href="http://ergoemacs.org/emacs/elisp_feature_name.html">这里</a>读到更多关于 feature 的内容。
+</p>
+
+<p>
+接着我们需要弄明白的是 <code>load-file</code> , <code>load</code> , <code>require</code> , <code>autoload</code> 之间的区别。（他们之间区别的链接已经再前面贴过了，你也可以在<a href="http://ergoemacs.org/emacs/elisp_library_system.html">这里</a>找到之前同样的链接）
+</p>
+
+<p>
+简单来说， <code>load-file</code> 用于打开某一个指定的文件，用于当你不想让 Emacs 来去决定加载某个配置文件时（ <code>.el</code> 或者 <code>.elc</code> 文件）。
+</p>
+
+<p>
+<code>load</code> 搜索 <code>load-path</code> 中的路径并打开第一个所找到的匹配文件名的文件。此方法用于你预先不知道文件路径的时候。
+</p>
+
+<p>
+<code>require</code> 加载还未被加载的插件。首先它会查看变量 <code>features</code> 中是否存在所要加载的符号如果不存在则使用上面提到的 <code>load</code> 将其载入。（有点类似于其他编程语言中的 <code>import</code> ）
+</p>
+
+<p>
+<code>autoload</code> 用于仅在函数调用时加载文件，使用此方法可以大大节省编辑器的启动时间。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> 更好的默认设置</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+在这一节我们会配置我们的编辑器使其有更好的使用体验。整个过程就如同搭积木一般，将更好的体验建立在已有的功能基础之上。这样的优化使整个过程变得更高效，也更有趣。
+</p>
+
+<p>
+下面的代码可以是 Emacs 自动加载外部修改过的文件。
+</p>
+
+<pre class="example">
+(global-auto-revert-mode t)
+</pre>
+
+<p>
+使用下面的代码可以关闭自己生产的保存文件（之前我们已经关闭过了 Emacs 自动生产的备份文件了，现在是关闭自动保存文件）。
+</p>
+
+<pre class="example">
+(setq auto-save-default nil)
+</pre>
+
+<p>
+如果你发现你在使用中发现了那些编辑行为与你预期的不相符时，你可以通过搜索引擎去寻找解决方案然后将其加入你的配置中并打造一个真正属于你的神器！
+</p>
+
+<p>
+<code>popwin</code> 插件可以自动将光标移动到，新创建的窗口中。使用下面的代码将其启用，
+</p>
+
+<pre class="example">
+(require 'popwin)
+(popwin-mode t)
+</pre>
+
+<p>
+也许你并不喜欢听到错误时的“哔哔”的警告提示音，使用下面的代码你可以关闭 Emacs 中的警告音，
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(setq ring-bell-function 'ignore)
+</pre>
+</div>
+
+<p>
+每一次当 Emacs 需要与你确认某个命令时需要输入 <code>(yes or no)</code> 比较麻烦，所有我们可以使用下面的代码，设置一个别名将其简化为只输入 <code>(y or n)</code> 。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(fset 'yes-or-no-p 'y-or-n-p)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-5-2-1" class="outline-4">
+<h4 id="sec-5-2-1"><span class="section-number-4">5.2.1</span> 代码缩进</h4>
+<div class="outline-text-4" id="text-5-2-1">
+<p>
+<code>indent-region</code> 可以帮我们重新缩进所选区域的代码，但是每一次都选中十分麻烦。使用下面的代码可以一次重新缩进全部缓冲区的代码。（之后也会介绍更好用的，代码格式美化的插件）
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(defun indent-buffer()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(defun indent-region-or-buffer()
+  (interactive)
+  (save-excursion
+    (if (region-active-p)
+	(progn
+	  (indent-region (region-beginning) (region-end))
+	  (message "Indent selected region."))
+      (progn
+	(indent-buffer)
+	(message "Indent buffer.")))))
+</pre>
+</div>
+
+<p>
+然后再将其用下面的代码将其绑定为快捷键，第一个 <code>\</code> 用于将紧跟的 <code>\</code> 进行逃脱（escape）。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-2-2" class="outline-4">
+<h4 id="sec-5-2-2"><span class="section-number-4">5.2.2</span> 缩写补全</h4>
+<div class="outline-text-4" id="text-5-2-2">
+<p>
+使用下面的代码我们可以开启 <code>abbrev</code> 模式并定义一个缩写表，每当我们输入下面的缩写并以空格结束时，Emacs 就会将其自动展开成为我们所需要的字符串。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(abbrev-mode t)
+(define-abbrev-table 'global-abbrev-table '(
+					    ;; Shifu
+					    ("8zl" "zilongshanren")
+					    ;; Tudi
+					    ("8lxy" "lixinyang")
+					   ))
+</pre>
+</div>
+
+<p>
+上面的缩写前使用的 <code>8</code> 也类似于命名空间的作用，使其不会与我们所常用的字符串冲突。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5-2-3" class="outline-4">
+<h4 id="sec-5-2-3"><span class="section-number-4">5.2.3</span> Hippie 补全</h4>
+<div class="outline-text-4" id="text-5-2-3">
+<p>
+Company 有时候补全功能并不是非常理想，这时就可以使用 Hippie Expand 来完成补全。Company Mode 补全效果不理想的原因是在不同的区域中会使用不同的后端函数来完成补全，但是当后端补全函数不能被激活时，则补全就不会被激活。
+</p>
+
+
+<p>
+我们可以将下面的代码加入到我们的配置文件中，来增强 Hippie Expand 的功能，
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(setq hippie-expand-try-function-list '(try-expand-debbrev
+					try-expand-debbrev-all-buffers
+					try-expand-debbrev-from-kill
+					try-complete-file-name-partially
+					try-complete-file-name
+					try-expand-all-abbrevs
+					try-expand-list
+					try-expand-line
+					try-complete-lisp-symbol-partially
+					try-complete-lisp-symbol))
+</pre>
+</div>
+
+<p>
+然后将其绑定为快捷键，使我们可以更方便的使用它。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(global-set-key (kbd "s-/") 'hippie-expand)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Dired Mode</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+Dired Mode 是一个强大的模式它能让我们完成和文件管理相关的所有操作。
+</p>
+
+<p>
+使用 <code>C-x d</code> 就可以进入 Dired Mode，这个模式类似于图形界面系统中的资源管理器。你可以在其中查看文件和目录的详细信息，对他们进行各种操作，甚至复制粘贴缓冲区中的内容。下面是一些常用的操作（下面的所有键均需在 Dired Mode 下使用），
+</p>
+
+<ul class="org-ul">
+<li><code>+</code> 创建目录
+</li>
+<li><code>g</code> 刷新目录
+</li>
+<li><code>C</code> 拷贝
+</li>
+<li><code>D</code> 删除
+</li>
+<li><code>R</code> 重命名
+</li>
+<li><code>d</code> 标记删除
+</li>
+<li><code>u</code> 取消标记
+</li>
+<li><code>x</code> 执行所有的标记
+</li>
+</ul>
+
+<p>
+这里有几点可以优化的地方。第一是删除目录的时候 Emacs 会询问是否递归删除或拷贝，这也有些麻烦我们可以用下面的配置将其设定为默认递归删除目录（出于安全原因的考虑，也许你需要保持此行为。所有文中的配置请务必按需配置）。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(setq dired-recursive-deletes 'always)
+(setq dired-recursive-copies 'always)
+</pre>
+</div>
+
+<p>
+第二是，每一次你进入一个回车进入一个新的目录中是，一个新的缓冲区就会被建立。这使得我们的缓冲区列表中充满了大量没有实际意义的记录。我们可以使用下面的代码，让 Emacs 重用唯一的一个缓冲区作为 Dired Mode 显示专用缓冲区。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(put 'dired-find-alternate-file 'disabled nil)
+
+;; 主动加载 Dired Mode
+;; (require 'dired)
+;; (defined-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+
+;; 延迟加载
+(with-eval-after-load 'dired
+    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+</pre>
+</div>
+
+<p>
+使用延迟加载可以使编辑器加载速度有所提升。
+</p>
+
+<p>
+启用 <code>dired-x</code> 可以让每一次进入 Dired 模式时，使用新的快捷键 <code>C-x C-j</code> 就可以进入当前文件夹的所在的路径。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(require 'dired-x)
+</pre>
+</div>
+
+<p>
+使用 <code>(setq dired-dwin-target t)</code> 则可以使当一个窗口（frame）中存在两个分屏（window）时，将另一个分屏自动设置成拷贝地址的目标。
+</p>
+
+<p>
+最后如果你是 Mac OS X 的用户，可以安装 <code>reveal-in-osx-finder</code> 这个插件（你可以在<a href="https://melpa.org/#/reveal-in-osx-finder">这里</a>找到它），他可以将任意文件直接在 Finder 中打开。你要做的就是将其添加至第二天视频中提到的插件列表中即可（现在它位于我们模块化的 <code>init-packages.el</code> 文件中），下载启动 Emacs 时，它就会自动帮你完成下载。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5-4" class="outline-3">
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> Org-mode 管理 Emacs 配置</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+Org-mode 下的文学编程将颠覆你对于 Emacs 的看法。因为我们也可以使用 Org 来管理 Emacs 的配置文件（笔者和他的师傅其实更倾向于模块管理配置文件）。
+</p>
+
+<p>
+你需要将下面的代码放入配置入口文件（ <code>init.el</code> ）中，
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(package-initialize)
+
+(require 'org-install)
+(require 'ob-tangle)
+(org-babel-load-file (expand-file-name "org-file-name.org" user-emacs-directory))
+</pre>
+</div>
+
+<p>
+之后我们需要做的仅仅只是将所有的配置文件放入 Org 模式中的代码块即可，并使用目录结构来表述你的配置文件再把它保存在与入口文件相同的目录中即可（文件名为 <code>org-file-name.org</code> ）。Emacs 会提取其中的配置并使其生效。这样做的好处是可以使自己和他人更直观的，理解你的配置文件或者代码。
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: zilongshanren</p>
+<p class="date">Created: 2016-04-15 Fri 02:35</p>
+<p class="creator">li-xinyang</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
