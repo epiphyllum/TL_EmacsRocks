@@ -26,6 +26,7 @@
 			   ;; --- Major Mode ---
 			   js2-mode
 			   markdown-mode
+			   web-mode
 			   ;; --- Minor Mode ---
 			   ;; Quick Note Taking
 			   deft
@@ -98,6 +99,7 @@
 (setq auto-mode-alist
       (append
        '(("\\.js\\'" . js2-mode))
+       '(("\\.html\\'" . web-mode))
        auto-mode-alist))
 
 ;; markdown-mode

@@ -861,9 +861,9 @@ Org-mode 下的文学编程将颠覆你对于 Emacs 的看法。因为我们也�
 
 视频地址如下
 
-- 占位
-- 占位
-- 占位
+- 百度网盘 http://pan.baidu.com/s/1slOOWSd
+- 优酷： http://v.youku.com/v_show/id_XMTU0NjMyNDg5Ng==.html
+- Youtube: https://www.youtube.com/watch?v=BpjwzSB2d00&feature=youtu.be
 
 照理我们先修复一些现在存在的小问题。首先是自动配对的小问题，在 Lisp 中我们有时候只需要一个 ='= 但是 Emacs 很好心的帮我们做了补全，但这并不是我们需要的。我们可以通过下面的代码来让使 Lisp 在 Emacs 中的编辑变得更方便（可以将其添加至 =init-default.el= 配置文件中）。
 
@@ -909,6 +909,164 @@ Lisp 的宏（Macro）类似于 C++ 中的模板，并可以生产新的代码�
 #+END_SRC
 
 ** web-mode
+
+Emacs 自带的 HTML Mode 使用起来并不是那么的方便，而 web-mode 则是一个非常常用也很强大的用于编辑前端代码的 Major Mode（你可以在[[https://github.com/fxbois/web-mode][这里]]找到更多关于它的信息）。
+
+首先我们需要安装它，照理我们需要将其添加至我们的插件列表中去。
+
+#+BEGIN_SRC emacs-lisp
+  (defvar xinyang/packages '(
+                             ;; 你其他的插件在这里
+                             web-mode
+                             ) "Default packages")
+#+END_SRC
+
+在安装完成后我们就可以开始配置它了，首先我们需要做的是将所有的 =*.html= 文件都使用 web-mode 来打开。
+
+#+BEGIN_SRC emacs-lisp
+  (setq auto-mode-alist
+        (append
+         '(("\\.js\\'" . js2-mode))
+         '(("\\.html\\'" . web-mode))
+         auto-mode-alist))
+#+END_SRC
+
+这样所有的 HTML 代码在 Emacs 中就会之间启用 web-mode 而非默认的 HTML Mode 了。你可以阅读它的[[http://web-mode.org/][文档]]来学习更多 web-mode 详细的使用方法。
+
+例如使用 =M-;= 就可以注释当前行代码或选中行的代码。
+
+接下来我们来做更多细节的配置，首先是缩减的大小的设置。因为 web-mode 支持在 HTML 文件中存在多语言，所以我们可以对不同的语言的缩减做出设置。下面的代码用于设置初始的代码缩进，
+
+#+BEGIN_SRC emacs-lisp
+(defun my-web-mode-indent-setup ()
+  (setq web-mode-markup-indent-offset 2) ; web-mode, html tag in html file
+  (setq web-mode-css-indent-offset 2)    ; web-mode, css in html file
+  (setq web-mode-code-indent-offset 2)   ; web-mode, js code in html file
+  )
+(add-hook 'web-mode-hook 'my-web-mode-indent-setup)
+#+END_SRC
+
+下面的函数可以用于在两个空格和四个空格之间进行切换，
+
+#+BEGIN_SRC emacs-lisp
+(defun my-toggle-web-indent ()
+  (interactive)
+  ;; web development
+  (if (or (eq major-mode 'js-mode) (eq major-mode 'js2-mode))
+      (progn
+        (setq js-indent-level (if (= js-indent-level 2) 4 2))
+        (setq js2-basic-offset (if (= js2-basic-offset 2) 4 2))))
+
+  (if (eq major-mode 'web-mode)
+      (progn (setq web-mode-markup-indent-offset (if (= web-mode-markup-indent-offset 2) 4 2))
+             (setq web-mode-css-indent-offset (if (= web-mode-css-indent-offset 2) 4 2))
+             (setq web-mode-code-indent-offset (if (= web-mode-code-indent-offset 2) 4 2))))
+  (if (eq major-mode 'css-mode)
+      (setq css-indent-offset (if (= css-indent-offset 2) 4 2)))
+
+  (setq indent-tabs-mode nil))
+
+(global-set-key (kbd "C-c t i") 'my-toggle-web-indent)
+#+END_SRC
 ** js2-refactor
+
+js2-refactor 是一个用于重构 JavaScript 的插件，它是一个 Minor Mode，你可以在 [[https://github.com/magnars/js2-refactor.el][GitHub]] 找到更多关于这个插件的信息。
+
+我们使用刚刚所提到的方法来安装 js2-refactor 插件。
+
+在安装完成后，添加一个钩子（Hook）
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(js2r-add-keybindings-with-prefix "C-c C-m")
+#+END_SRC
+
+我们可以使用 =C-c C-m= 然后输入功能前缀，例如 =em= 是 extract-method 的前缀。更多的功能和使用方法也可以在上面给出的链接中找到，所有的前缀也可以在[[https://github.com/magnars/js2-refactor.el#refactorings][这里]]找到。
+
+** 优化 occur 与 imenu
+
+下面的代码用于配置 Occur Mode 使其默认搜索当前光标下的字符串，
+
+#+BEGIN_SRC emacs-lisp
+(defun occur-dwim ()
+  "Call `occur' with a sane default."
+  (interactive)
+  (push (if (region-active-p)
+            (buffer-substring-no-properties
+             (region-beginning)
+             (region-end))
+          (let ((sym (thing-at-point 'symbol)))
+            (when (stringp sym)
+              (regexp-quote sym))))
+        regexp-history)
+  (call-interactively 'occur))
+(global-set-key (kbd "M-s o") 'occur-dwim)
+#+END_SRC
+
+=dwin= 是按我说的做的缩写（Do what I mean）。
+
+Occur 可以用于显示变量或函数的定义，我们可以通过 popwin 的 customize-group 将定义显示设置为右边而不是默认的底部（ =customize-group > popwin > Popup Window Position= 设置为 right），也可以在这里对其宽度进行调节。
+
+Occur 与普通的搜索模式不同的是，它可以使用 Occur-Edit Mode (在弹出的窗口中按 =1= 进入编辑模式) 对搜索到的结果进行之间的编辑。
+
+imenu 可以显示当前所有缓冲区的列表，下面的配置可以让其拥有更精确的跳转，
+
+#+BEGIN_SRC emacs-lisp
+(defun js2-imenu-make-index ()
+      (interactive)
+      (save-excursion
+        ;; (setq imenu-generic-expression '((nil "describe\\(\"\\(.+\\)\"" 1)))
+        (imenu--generic-function '(("describe" "\\s-*describe\\s-*(\\s-*[\"']\\(.+\\)[\"']\\s-*,.*" 1)
+                                   ("it" "\\s-*it\\s-*(\\s-*[\"']\\(.+\\)[\"']\\s-*,.*" 1)
+                                   ("test" "\\s-*test\\s-*(\\s-*[\"']\\(.+\\)[\"']\\s-*,.*" 1)
+                                   ("before" "\\s-*before\\s-*(\\s-*[\"']\\(.+\\)[\"']\\s-*,.*" 1)
+                                   ("after" "\\s-*after\\s-*(\\s-*[\"']\\(.+\\)[\"']\\s-*,.*" 1)
+                                   ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
+                                   ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
+                                   ("Function" "^var[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
+                                   ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*()[ \t]*{" 1)
+                                   ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*:[ \t]*function[ \t]*(" 1)
+                                   ("Task" "[. \t]task([ \t]*['\"]\\([^'\"]+\\)" 1)))))
+(add-hook 'js2-mode-hook
+              (lambda ()
+                (setq imenu-create-index-function 'js2-imenu-make-index)))
+
+(global-set-key (kbd "M-s i") 'counsel-imenu)
+#+END_SRC
+
+** expand-region
+
+使用同样的方法将 expand-region 添加至我们的插件列表中，重启 Emacs 安装插件。
+
+再为其绑定一个快捷键，
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-=") 'er/expand-region)
+#+END_SRC
+
+使用这个插件可以使我们更方便的选中一个区域。（更多使用方法和文档可以在[[https://github.com/magnars/expand-region.el][这里]]找到）
+
+** iedit
+
+iedit 是一个可以同时编辑多个区域的插件，它类似 Sublime Text 中的多光标编辑。它的 GitHub 仓库在[[https://github.com/victorhge/iedit][这里]]。
+
+我们将其绑定快捷键以便更快捷的使用这个模式（ =C-;= 为默认快捷键），
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "M-s e") 'iedit-mode)
+#+END_SRC
+
+我们可以使用 Customized-group 来更改其高亮的背景色，将 =hightlight= 改为 =region= 。
+
 ** Org 导出
-* 第六天：占位符
+
+使用 =C-x C-e= 可以将 Org-mode 文档导出为你需要的格式，例如 HTML 或者 PDF 文件。你现在看到的这本教程就是由 Org-mode 所导出生产的。
+
+* 第六天：代码片段与语法检查器
+
+视频地址如下
+
+- 百度网盘： http://pan.baidu.com/s/1miLBw5E
+- 优酷： http://v.youku.com/v_show/id_XMTU0NjYwNzQ3Mg==.html
+- Youtube: https://www.youtube.com/watch?v=WIzWxTc1KUI&featur
+
