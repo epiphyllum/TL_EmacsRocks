@@ -857,5 +857,58 @@ Org-mode 下的文学编程将颠覆你对于 Emacs 的看法。因为我们也�
 #+END_SRC
 
 之后我们需要做的仅仅只是将所有的配置文件放入 Org 模式中的代码块即可，并使用目录结构来表述你的配置文件再把它保存在与入口文件相同的目录中即可（文件名为 =org-file-name.org= ）。Emacs 会提取其中的配置并使其生效。这样做的好处是可以使自己和他人更直观的，理解你的配置文件或者代码。
-* 第五天：占位符
+* 第五天：打造前端开发神器
+
+视频地址如下
+
+- 占位
+- 占位
+- 占位
+
+照理我们先修复一些现在存在的小问题。首先是自动配对的小问题，在 Lisp 中我们有时候只需要一个 ='= 但是 Emacs 很好心的帮我们做了补全，但这并不是我们需要的。我们可以通过下面的代码来让使 Lisp 在 Emacs 中的编辑变得更方便（可以将其添加至 =init-default.el= 配置文件中）。
+
+#+BEGIN_SRC emacs-lisp
+(sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+#+END_SRC
+
+在添加配置代码后重启 Emacs 使其生效。当然这个方法你也可以运用在其他的各个 Major Mode 中，如果你不想 Emacs 对某些符号进行类似的自动匹配补全。
+
+=show-paren-mode= 可以使鼠标在括号上是高亮其所匹配的另一半括号，然而我们想要光标在括号内时就高亮包含内容的两个括号，使用下面的代码就可以做到这一点。
+
+#+BEGIN_SRC emacs-lisp
+(define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  "Highlight enclosing parens."
+  (cond ((looking-at-p "\\s(") (funcall fn))
+        (t (save-excursion
+             (ignore-errors (backward-up-list))
+             (funcall fn)))))
+#+END_SRC
+
+Lisp 的宏（Macro）类似于 C++ 中的模板，并可以生产新的代码（你可以在[[http://stackoverflow.com/questions/267862/what-makes-lisp-macros-so-special][这里]]找到更多关于宏的讨论）。使用它，我们可以增强某个函数的功能而不去更改这个函数的代码。
+
+还有一个小问题就是解决在不同系统中的换行符，例如在 DOS 系统下的 =\M= 换行符，这让我们有时候在 Unix 系统中很是头疼，因为它的存在会使版本控制误以为整行的代码都被修改过而造成不必要的麻烦。（你可以在[[http://unix.stackexchange.com/questions/32001/what-is-m-and-how-do-i-get-rid-of-it][这里]]找到更多关于 =\M= 的信息）
+
+我们用两种方式来处理这个问题，隐藏这个换行符或者将其删除。首先下面是隐藏的方法，
+
+#+BEGIN_SRC emacs-lisp
+(defun hidden-dos-eol ()
+  "Do not show ^M in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
+#+END_SRC
+
+使用下面的代码则可以定义函数将此换行符删除，
+
+#+BEGIN_SRC emacs-lisp
+(defun remove-dos-eol ()
+  "Replace DOS eolns CR LF with Unix eolns CR"
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "\r" nil t) (replace-match "")))
+#+END_SRC
+
+** web-mode
+** js2-refactor
+** Org 导出
 * 第六天：占位符
