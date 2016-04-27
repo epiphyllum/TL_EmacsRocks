@@ -55,6 +55,52 @@
                                          try-complete-lisp-symbol-partially
                                          try-complete-lisp-symbol))
 
+;; Single ' When Editing Lisp
+(sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+(sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
+
+;; Highlight parens when inside it
+;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
+;;   "Highlight enclosing parens."
+;;  (cond ((looking-at-p "\\s(") (funcall fn))
+;;        (t (save-excursion
+;;             (ignore-errors (backward-up-list))
+;;             (funcall fn)))))
+
+;; Better Occur Mode
+(defun occur-dwim ()
+  "Call `occur' with a sane default."
+  (interactive)
+  (push (if (region-active-p)
+            (buffer-substring-no-properties
+             (region-beginning)
+             (region-end))
+          (let ((sym (thing-at-point 'symbol)))
+            (when (stringp sym)
+              (regexp-quote sym))))
+        regexp-history)
+  (call-interactively 'occur))
+
+;; Better iMenu Mode
+(defun js2-imenu-make-index ()
+      (interactive)
+      (save-excursion
+        ;; (setq imenu-generic-expression '((nil "describe\\(\"\\(.+\\)\"" 1)))
+        (imenu--generic-function '(("describe" "\\s-*describe\\s-*(\\s-*[\"']\\(.+\\)[\"']\\s-*,.*" 1)
+                                   ("it" "\\s-*it\\s-*(\\s-*[\"']\\(.+\\)[\"']\\s-*,.*" 1)
+                                   ("test" "\\s-*test\\s-*(\\s-*[\"']\\(.+\\)[\"']\\s-*,.*" 1)
+                                   ("before" "\\s-*before\\s-*(\\s-*[\"']\\(.+\\)[\"']\\s-*,.*" 1)
+                                   ("after" "\\s-*after\\s-*(\\s-*[\"']\\(.+\\)[\"']\\s-*,.*" 1)
+                                   ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
+                                   ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
+                                   ("Function" "^var[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
+                                   ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*()[ \t]*{" 1)
+                                   ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*:[ \t]*function[ \t]*(" 1)
+                                   ("Task" "[. \t]task([ \t]*['\"]\\([^'\"]+\\)" 1)))))
+(add-hook 'js2-mode-hook
+              (lambda ()
+                (setq imenu-create-index-function 'js2-imenu-make-index)))
+
 ;; Better Dired Mode
 (setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)

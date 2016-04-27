@@ -1008,7 +1008,7 @@ js2-refactor 是一个用于重构 JavaScript 的插件，它是一个 Minor Mod
 
 Occur 可以用于显示变量或函数的定义，我们可以通过 popwin 的 customize-group 将定义显示设置为右边而不是默认的底部（ =customize-group > popwin > Popup Window Position= 设置为 right），也可以在这里对其宽度进行调节。
 
-Occur 与普通的搜索模式不同的是，它可以使用 Occur-Edit Mode (在弹出的窗口中按 =1= 进入编辑模式) 对搜索到的结果进行之间的编辑。
+Occur 与普通的搜索模式不同的是，它可以使用 Occur-Edit Mode (在弹出的窗口中按 =e= 进入编辑模式) 对搜索到的结果进行之间的编辑。
 
 imenu 可以显示当前所有缓冲区的列表，下面的配置可以让其拥有更精确的跳转，
 

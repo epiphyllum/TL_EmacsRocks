@@ -32,8 +32,12 @@
 			   deft
 			   ;; JavaScript REPL
 			   nodejs-repl
+			   ;; JavaScript Refactor Tool
+			   js2-refactor
 			   ;; Find OS X Executable Helper Package
 			   exec-path-from-shell
+			   ;; Quick Region Selection
+			   expand-region
 			   ;; --- Themes ---
 			   ;; monokai-theme
 			   solarized-theme
@@ -66,6 +70,14 @@
 ;; Package Related Setting
 ;; ===================================================================
 
+;; Match file type to Major Modes
+;; -------------------------------------------------------------------
+(setq auto-mode-alist
+      (append
+       '(("\\.js\\'" . js2-mode))    ;; *.js   -> js2-mode
+       '(("\\.html\\'" . web-mode))  ;; *.html -> web-mode
+       auto-mode-alist))
+
 ;; Company Mode
 ;; -------------------------------------------------------------------
 ;; Enable global company mode
@@ -96,11 +108,19 @@
 ;; js2-mode
 ;; -------------------------------------------------------------------
 ;; Enable js2-mode for JavaScript File
-(setq auto-mode-alist
-      (append
-       '(("\\.js\\'" . js2-mode))
-       '(("\\.html\\'" . web-mode))
-       auto-mode-alist))
+
+;; js2-refactor
+;; -------------------------------------------------------------------
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+
+;; web-mode
+;; -------------------------------------------------------------------
+;; Set web-mode code indentations
+(defun my-web-mode-indent-setup()
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
+(add-hook 'web-mode-hook 'my-web-mode-indent-setup)
 
 ;; markdown-mode
 ;; -------------------------------------------------------------------

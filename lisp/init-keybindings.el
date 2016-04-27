@@ -50,5 +50,24 @@
 ;; -------------------------------------------------------------------
 (global-set-key (kbd "s-/") 'hippie-expand)
 
+;; js2-refactor
+;; -------------------------------------------------------------------
+(js2r-add-keybindings-with-prefix "C-c C-m")
+
+;; Occur Mode
+;; -------------------------------------------------------------------
+(global-set-key (kbd "M-s o") 'occur-dwi)
+
+;; iMenu Mode
+;; -------------------------------------------------------------------
+(global-set-key (kbd "M-s i") 'counsel-imenu)
+
+;; expand-region
+;; -------------------------------------------------------------------
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+;; iEdit Mode
+;; -------------------------------------------------------------------
+(global-set-key (kbd "M-s e") 'iedit-mode)
 
 (provide 'init-keybindings)
