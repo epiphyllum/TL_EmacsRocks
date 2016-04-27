@@ -140,12 +140,4 @@
 (require 'popwin)
 (popwin-mode 1)
 
-;; neotree
-;; -------------------------------------------------------------------
-(when neo-persist-show
-  (add-hook 'popwin:before-popup-hook
-	    (lambda () (setq neo-persist-show nil)))
-  (add-hook 'popwin:after-popup-hook
-	    (lambda () (setq neo-persist-show t))))
-
 (provide 'init-packages)
