@@ -70,4 +70,14 @@
 ;; -------------------------------------------------------------------
 (global-set-key (kbd "M-s e") 'iedit-mode)
 
+;; helm-ag
+;; -------------------------------------------------------------------
+(global-set-key (kbd "C-c p s") 'helm-do-ag-project-root)
+
+;; Neotree
+;; -------------------------------------------------------------------
+(global-set-key (kbd "C-\\") 'neotree-toggle)
+
+
+
 (provide 'init-keybindings)

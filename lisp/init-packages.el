@@ -5,9 +5,9 @@
 ;; |\/|  /\  |\ |  /\  / _` |__   |\/| |__  |\ |  |
 ;; |  | /~~\ | \| /~~\ \__> |___  |  | |___ | \|  |
 (when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") 1))
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") 1))
 
 ;; cl - Common Lisp Extension
 (require 'cl)
@@ -38,6 +38,10 @@
 			   exec-path-from-shell
 			   ;; Quick Region Selection
 			   expand-region
+			   ;; Quick Search ag
+			   helm-ag
+			   ;; neotree tree plugin like NerdTree for Vim
+			   neotree
 			   ;; --- Themes ---
 			   ;; monokai-theme
 			   solarized-theme
@@ -46,16 +50,16 @@
 (setq package-selected-packages xinyang/packages)
 
 (defun xinyang/packages-installed-p ()
-    (loop for pkg in xinyang/packages
-          when (not (package-installed-p pkg)) do (return nil)
-          finally (return 1)))
+  (loop for pkg in xinyang/packages
+	when (not (package-installed-p pkg)) do (return nil)
+	finally (return 1)))
 
 (unless (xinyang/packages-installed-p)
-    (message "%s" "Refreshing package database...")
-    (package-refresh-contents)
-    (dolist (pkg xinyang/packages)
-      (when (not (package-installed-p pkg))
-        (package-install pkg))))
+  (message "%s" "Refreshing package database...")
+  (package-refresh-contents)
+  (dolist (pkg xinyang/packages)
+    (when (not (package-installed-p pkg))
+      (package-install pkg))))
 
 ;; Find Executable Path on OS X
 (when (memq window-system '(mac ns))
@@ -76,6 +80,7 @@
       (append
        '(("\\.js\\'" . js2-mode))    ;; *.js   -> js2-mode
        '(("\\.html\\'" . web-mode))  ;; *.html -> web-mode
+       '(("\\.hbs\\'" . web-mode))   ;; *.hbs  -> web-mode
        auto-mode-alist))
 
 ;; Company Mode
@@ -134,5 +139,13 @@
 ;; -------------------------------------------------------------------
 (require 'popwin)
 (popwin-mode 1)
+
+;; neotree
+;; -------------------------------------------------------------------
+(when neo-persist-show
+  (add-hook 'popwin:before-popup-hook
+	    (lambda () (setq neo-persist-show nil)))
+  (add-hook 'popwin:after-popup-hook
+	    (lambda () (setq neo-persist-show t))))
 
 (provide 'init-packages)
