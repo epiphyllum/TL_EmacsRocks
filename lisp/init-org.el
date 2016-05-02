@@ -26,6 +26,12 @@
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
 
+;; Org Template
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/org/GTD.org" "Do More Things")
+	 "* TODO [#B] %?\n  %i\n"
+	 :empty-lines 1)))
+
 ;; Set ToDos Type
 (setq org-todo-keywords
       '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))

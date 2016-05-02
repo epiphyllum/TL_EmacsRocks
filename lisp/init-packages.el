@@ -42,6 +42,12 @@
 			   helm-ag
 			   ;; neotree tree plugin like NerdTree for Vim
 			   neotree
+			   ;; YASnippet, A template system for Emacs
+			   yasnippet
+			   ;; emment-mode
+			   emmet-mode
+			   ;; Pomodoro
+			   org-pomodoro
 			   ;; --- Themes ---
 			   ;; monokai-theme
 			   solarized-theme
@@ -87,6 +93,7 @@
 ;; -------------------------------------------------------------------
 ;; Enable global company mode
 (global-company-mode 1)
+(setq company-dabbrev-downcase nil)
 
 ;; Hungry-delete
 ;; -------------------------------------------------------------------
@@ -139,5 +146,10 @@
 ;; -------------------------------------------------------------------
 (require 'popwin)
 (popwin-mode 1)
+
+;; yasnippet
+;; -------------------------------------------------------------------
+;; (yas-reload-all)
+;; (add-hook 'prog-mode-hook #'yas-minor-mode)
 
 (provide 'init-packages)

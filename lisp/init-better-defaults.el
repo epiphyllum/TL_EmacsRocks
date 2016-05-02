@@ -7,6 +7,9 @@
 ;; Better Default
 ;; ==================================================================
 
+;; Default UTF-8 Encoding
+(set-language-environment "UTF-8")
+
 ;; Disable Backup File
 (setq make-backup-files nil)
 
