@@ -26,14 +26,32 @@
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
 
+;; Set Org-mode Image width-max
+;; (setq org-image-actual-width 300)
+;; Always resize inline image to 300 pixels
+(setq org-image-actual-width '(300))
+;; If there is a #+ATTR.*: width="200", resize to 200; Otherwise resize to 300
+;; (setq org-image-actual-width nil)
+;; If there is a #+ATTR.*: width="200", resize to 200; Otherwise do not resize
+
 ;; Org Template
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/GTD.org" "Do More Things")
+      '(("t" "Todo" entry (file+headline "~/org/GTD.org" "Inbox")
 	 "* TODO [#B] %?\n  %i\n"
 	 :empty-lines 1)))
 
+;; Org Agendar Custome Command
+;; ("H" "Context Lists"
+;;  ((agendar)
+;;   (tags-todo "OFFICE")
+;;   (tags-todo "HOME")
+;;   (tags-todo "READING")))
+
+
 ;; Set ToDos Type
 (setq org-todo-keywords
-      '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+      '((sequence "TODO" "STARTED" "WAITING" "DONE")))
+(setq org-agenda-include-diary 1)
+(setq org-agenda-include-all-todo 1)
 
 (provide 'init-org)
