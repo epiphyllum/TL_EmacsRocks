@@ -11,6 +11,9 @@
  '(evil-leader/leader "SPC")
  '(evil-want-C-u-scroll t)
  '(org-startup-truncated nil)
+ '(org-todo-keywords
+   (quote
+    ((sequence "TODO(t)" "IN-PROGRESS(i)" "WAITING(w)" "DONE(d)" "SOMEDAY(s)"))))
  '(package-selected-packages (quote (company))))
 
 (custom-set-faces

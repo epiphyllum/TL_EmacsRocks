@@ -36,4 +36,12 @@
 (setq org-todo-keywords
       '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
+;; Org-Refile
+(setq org-refile-targets (list (cons nil (cons :maxlevel 2))))
+
+;; Start Emacs with Agenda View
+;; (org-agenda-list)
+;; Start Emacs with GTD List
+(find-file "~/org/GTD.org")
+
 (provide 'init-org)
