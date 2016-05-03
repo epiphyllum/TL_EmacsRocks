@@ -22,6 +22,9 @@
 ;; Auto Parenthesis Matching
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
+;; Linewrap
+(global-visual-line-mode 1)
+
 ;; Enable Recent Files
 (require 'recentf)
 (recentf-mode 1)

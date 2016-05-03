@@ -62,4 +62,9 @@
 ;; Start Emacs with GTD List
 (find-file "~/org/GTD.org")
 
+;; Add Python Org-babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . 1)))
+
 (provide 'init-org)
