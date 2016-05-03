@@ -9,6 +9,9 @@
 ;; Quick Open Config File (init.el)
 (global-set-key (kbd "<f2>") 'open-init-file)
 
+;; Backward Delete One Word
+(global-set-key (kbd "C-w") 'backward-kill-word)
+
 ;; Open Recent Files List
 ;; (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
@@ -79,6 +82,8 @@
 ;; -------------------------------------------------------------------
 (global-set-key (kbd "C-\\") 'neotree-toggle)
 
-
+;; Evil
+;; -------------------------------------------------------------------
+(define-key evil-insert-state-map [escape] 'evil-normal-state)
 
 (provide 'init-keybindings)

@@ -30,6 +30,14 @@
 			   ;; --- Minor Mode ---
 			   ;; Evil Mode
 			   evil
+			   ;; Evil Leader Key
+			   evil-leader
+			   ;; Evil Surround
+			   evil-surround
+			   ;; Enable Window Numbering
+			   window-numbering
+			   ;; Shows Available Keys
+			   which-key
 			   ;; Relative Line Number
 			   linum-relative
 			   ;; Quick Note Taking
@@ -93,6 +101,40 @@
 ;; -------------------------------------------------------------------
 (require 'evil)
 (evil-mode 1)
+(setcdr evil-insert-state-map nil)
+
+;; Evil Leader Key
+;; -------------------------------------------------------------------
+(global-evil-leader-mode)
+
+(evil-leader/set-key
+  "ff" 'find-file
+  "bb" 'switch-to-buffer
+  "pf" 'counsel-git
+  "ps" 'helm-do-ag-project-root
+  "0"  'select-window-0
+  "1"  'select-window-1
+  "2"  'select-window-2
+  "3"  'select-window-3
+  "w/" 'split-window-right
+  "w-" 'split-window-below
+  ":"  'counsel-M-x
+  "wM" 'delete-other-windows
+  )
+
+;; Evil-nerd-commenter
+;; -------------------------------------------------------------------
+(define-key evil-normal-state-map (kbd "<SPC>/") 'evilnc-comment-or-uncomment-lines)
+(define-key evil-visual-state-map (kbd "<SPC>/") 'evilnc-comment-or-uncomment-lines)
+
+;; which-key
+;; -------------------------------------------------------------------
+(which-key-mode 1)
+
+;; Evil Surround
+;; -------------------------------------------------------------------
+(require 'evil-surround)
+(global-evil-surround-mode 1)
 
 ;; Match file type to Major Modes
 ;; -------------------------------------------------------------------
