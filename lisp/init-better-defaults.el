@@ -28,8 +28,8 @@
 (setq recentf-max-menu-items 25)
 
 ;; Load Editor Theme
-;; (load-theme 'solarized-dark 1)
-(load-theme 'solarized-light 1)
+(load-theme 'solarized-dark 1)
+;; (load-theme 'solarized-light 1)
 
 ;; Disable Warning Bell
 (setq ring-bell-function 'ignore)
