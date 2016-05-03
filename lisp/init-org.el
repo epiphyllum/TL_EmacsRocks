@@ -28,7 +28,7 @@
 
 ;; Org Template
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/GTD.org" "Do More Things")
+      '(("t" "Todo" entry (file+headline "~/org/GTD.org" "Inbox")
 	 "* TODO [#B] %?\n  %i\n"
 	 :empty-lines 1)))
 

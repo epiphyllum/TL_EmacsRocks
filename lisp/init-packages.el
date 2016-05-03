@@ -28,6 +28,10 @@
 			   markdown-mode
 			   web-mode
 			   ;; --- Minor Mode ---
+			   ;; Evil Mode
+			   evil
+			   ;; Relative Line Number
+			   linum-relative
 			   ;; Quick Note Taking
 			   deft
 			   ;; JavaScript REPL
@@ -79,6 +83,16 @@
 ;; .__/ |___  |   |  | | \| \__>
 ;; Package Related Setting
 ;; ===================================================================
+
+;; Enable Relative Line Number
+;; -------------------------------------------------------------------
+(require 'linum-relative)
+(linum-relative-global-mode)
+
+;; Evil Mode Setting
+;; -------------------------------------------------------------------
+(require 'evil)
+(evil-mode 1)
 
 ;; Match file type to Major Modes
 ;; -------------------------------------------------------------------
