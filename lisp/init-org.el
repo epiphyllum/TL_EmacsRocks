@@ -67,4 +67,8 @@
  'org-babel-load-languages
  '((python . 1)))
 
+;; Open Link in Google Chrome as Default
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
+
 (provide 'init-org)
