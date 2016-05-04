@@ -10,7 +10,7 @@
 ;; Hide menu bar
 (tool-bar-mode -1)
 ;; Hide scroll bar
-(scroll-bar-mode -1)
+;; (scroll-bar-mode -1)
 ;; Highlight Current Line
 (global-hl-line-mode 1)
 ;; Show line number

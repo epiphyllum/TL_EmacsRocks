@@ -53,7 +53,7 @@
 			   ;; Quick Search ag
 			   helm-ag
 			   ;; neotree tree plugin like NerdTree for Vim
-			   neotree
+			   ;; neotree
 			   ;; YASnippet, A template system for Emacs
 			   yasnippet
 			   ;; emment-mode
