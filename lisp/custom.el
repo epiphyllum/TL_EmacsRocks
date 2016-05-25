@@ -14,7 +14,9 @@
  '(org-todo-keywords
    (quote
     ((sequence "TODO(t)" "IN-PROGRESS(i)" "WAITING(w)" "DONE(d)" "SOMEDAY(s)"))))
- '(package-selected-packages (quote (company))))
+ '(package-selected-packages
+   (quote
+    (counsel deft emmet-mode evil-leader evil-surround exec-path-from-shell expand-region goto-chg helm-ag helm-core hungry-delete js2-refactor linum-relative markdown-mode multiple-cursors nodejs-repl org-pomodoro pallet popup popwin s shut-up smartparens smooth-scrolling solarized-theme swiper undo-tree web-mode which-key window-numbering yasnippet company))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

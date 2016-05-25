@@ -66,12 +66,11 @@
 (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
 
 ;; Highlight parens when inside it
-(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
+(defadvice show-paren-function (around fix-show-paren-function activate)
+  (cond ((looking-at-p "\\s(") ad-do-it)
 	(t (save-excursion
-             (ignore-errors (backward-up-list))
-             (funcall fn)))))
+	     (ignore-errors (backward-up-list))
+	     ad-do-it))))
 
 ;; Better Occur Mode
 (defun occur-dwim ()

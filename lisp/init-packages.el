@@ -12,73 +12,6 @@
 ;; cl - Common Lisp Extension
 (require 'cl)
 
-;; Add Packages
-(defvar xinyang/packages '(
-			   ;; --- Auto-completion ---
-			   company
-			   ;; --- Better Editor ---
-			   smooth-scrolling
-			   hungry-delete
-			   swiper
-			   counsel
-			   smartparens
-			   popwin
-			   ;; --- Major Mode ---
-			   js2-mode
-			   markdown-mode
-			   web-mode
-			   ;; --- Minor Mode ---
-			   ;; Evil Mode
-			   evil
-			   ;; Evil Leader Key
-			   evil-leader
-			   ;; Evil Surround
-			   evil-surround
-			   ;; Enable Window Numbering
-			   window-numbering
-			   ;; Shows Available Keys
-			   which-key
-			   ;; Relative Line Number
-			   linum-relative
-			   ;; Quick Note Taking
-			   deft
-			   ;; JavaScript REPL
-			   nodejs-repl
-			   ;; JavaScript Refactor Tool
-			   js2-refactor
-			   ;; Find OS X Executable Helper Package
-			   exec-path-from-shell
-			   ;; Quick Region Selection
-			   expand-region
-			   ;; Quick Search ag
-			   helm-ag
-			   ;; neotree tree plugin like NerdTree for Vim
-			   ;; neotree
-			   ;; YASnippet, A template system for Emacs
-			   yasnippet
-			   ;; emment-mode
-			   emmet-mode
-			   ;; Pomodoro
-			   org-pomodoro
-			   ;; --- Themes ---
-			   ;; monokai-theme
-			   solarized-theme
-			   ) "Default packages")
-
-(setq package-selected-packages xinyang/packages)
-
-(defun xinyang/packages-installed-p ()
-  (loop for pkg in xinyang/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return 1)))
-
-(unless (xinyang/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg xinyang/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
-
 ;; Find Executable Path on OS X
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
@@ -94,54 +27,29 @@
 
 ;; Enable Relative Line Number
 ;; -------------------------------------------------------------------
-(require 'linum-relative)
-(linum-relative-global-mode)
+;; (require 'linum-relative)
+;; (linum-relative-global-mode)
 
 ;; Evil Mode Setting
 ;; -------------------------------------------------------------------
-(require 'evil)
-(evil-mode 1)
-(setcdr evil-insert-state-map nil)
+;; (require 'evil)
+;; (evil-mode 1)
+;; (setcdr evil-insert-state-map nil)
 
 ;; Evil Leader Key
 ;; -------------------------------------------------------------------
-(global-evil-leader-mode)
-
-(evil-leader/set-key
-  "ff" 'find-file
-  "bb" 'switch-to-buffer
-  "pf" 'counsel-git
-  "ps" 'helm-do-ag-project-root
-  "0"  'select-window-0
-  "1"  'select-window-1
-  "2"  'select-window-2
-  "3"  'select-window-3
-  "w/" 'split-window-right
-  "w-" 'split-window-below
-  ":"  'counsel-M-x
-  "wM" 'delete-other-windows
-  )
-
-;; Evil-nerd-commenter
-;; -------------------------------------------------------------------
-(define-key evil-normal-state-map (kbd "<SPC>/") 'evilnc-comment-or-uncomment-lines)
-(define-key evil-visual-state-map (kbd "<SPC>/") 'evilnc-comment-or-uncomment-lines)
+;; (global-evil-leader-mode)
 
 ;; which-key
 ;; -------------------------------------------------------------------
 (which-key-mode 1)
-
-;; Evil Surround
-;; -------------------------------------------------------------------
-(require 'evil-surround)
-(global-evil-surround-mode 1)
-
 ;; Match file type to Major Modes
 ;; -------------------------------------------------------------------
 (setq auto-mode-alist
       (append
        '(("\\.js\\'" . js2-mode))    ;; *.js   -> js2-mode
        '(("\\.html\\'" . web-mode))  ;; *.html -> web-mode
+       '(("\\.jsx\\'" . web-mode))   ;; *.jsx  -> web-mode
        '(("\\.hbs\\'" . web-mode))   ;; *.hbs  -> web-mode
        auto-mode-alist))
 
@@ -179,7 +87,7 @@
 
 ;; js2-refactor
 ;; -------------------------------------------------------------------
-(add-hook 'js2-mode-hook #'js2-refactor-mode)
+;; (add-hook 'js2-mode-hook #'js2-refactor-mode)
 
 ;; web-mode
 ;; -------------------------------------------------------------------

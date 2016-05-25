@@ -1344,3 +1344,17 @@ Leader Key 可以通过 customize-group 来进行设置（Evil Leader/Leader）�
 ** Org Mode 中的搜索
 
 =C-c a= 中可以根据提示使用 =s= 来进行关键字所搜。使用 =t= 则可以进行代办事项的搜索。
+
+* 第八天 Cask 介绍与实践
+
+- 优酷视频： http://v.youku.com/v_show/id_XMTU3MzEyNDkxNg==.html16
+- 百度网盘：http://pan.baidu.com/s/1o83r1vc23
+- YouTube: https://www.youtube.com/watch?v=BJxEZGmypS0&index=2&list=PL-61yFRAEMlXDnsm3VHfrAm4oT6vVylRG2
+
+** ELPA 镜像
+
+[[https:emacs-china.org][Emacs China]] 维护了一个 ELPA 镜像，使用它可以在中国大陆内快速的安装 Emacs 的各类扩展。使用方法就是将原先 MELPA 的地址更换为镜像地址即可。具体使用说明与详细信息可以在[[http://elpa.emacs-china.org/][这里]]找到。
+
+** Cask
+
+Cask 是一个 Emacs Lisp 的管理工具。

@@ -85,6 +85,6 @@
 
 ;; Evil
 ;; -------------------------------------------------------------------
-(define-key evil-insert-state-map [escape] 'evil-normal-state)
+;; (define-key evil-insert-state-map [escape] 'evil-normal-state)
 
 (provide 'init-keybindings)
